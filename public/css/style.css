@@ -1,0 +1,43 @@
+@font-face {
+  font-family: iransans;
+  src:url(../fonts/iransansweb.woff2) format('woff2');
+}
+
+* {
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: iransans;
+}
+
+/* از بین بردن خط زیر لینک ها */
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* از بین بردن استایل لیست ها */
+ul {
+  list-style-type: none;
+}
+
+/* بک گراند ها */
+.bg-dark {
+  background-color: #232227;
+}
+
+.form-background {
+  background-image: url(../images/backgrounds/formBackground.jpg);
+}
+
+/* دکمه ها */
+.btn-main {
+  background-color: #fedb01;
+}
+.btn-main:hover {
+  background-color: #d8bb00;
+}
