@@ -1,74 +1,99 @@
-@extends('layouts.app')
-
+@extends('master')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+<div class="form-back-ground">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="wrap d-md-flex my-5 flex-row-reverse shdow">
+                    <div class="col-lg-6 d-flex justify-content-center align-items-center login-back">
+                        <img class="img-fluid img-responsive rounded product-image"  src='{{URL::asset("images/backgrounds/Registratioin.png")}}'>
+                    </div>
+                    <div class="col-lg-6 pl-md-5 form-container p-5 bg-white">
+                        <h2 class="display-5 text-center mb-5"> ثبت‌نام </h2>
+                        <form method="POST" action="{{ route('register') }}">
+                            @csrf
+                            <div class="form-group text-right">
+                                <label for="first_name">نام :</label>
 
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <input type="text" class="form-control @error('first_name') {{'is-invalid'}} @enderror" id="first_name" name="first_name" placeholder="حروف انگلیسی و فارسی و اعداد . . ." >
+                                @error('first_name')
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <div class="form-group text-right">
+                                <label for="last_name">نام خانوادگی :</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input type="text" class="form-control @error('last_name') {{'is-invalid'}} @enderror" id="last_name" name="last_name" placeholder="حروف انگلیسی و فارسی و اعداد . . ." >
+                                @error('last_name')
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
+                            </div>
 
+                            <div class="form-group text-right">
+                                <label for="username">نام کاربری :</label>
+
+                                <input type="text" class="form-control @error('username') {{'is-invalid'}} @enderror" id="username" name="username" placeholder="حروف انگلیسی و فارسی و اعداد . . ." >
+                                @error('username')
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group text-right">
+                                <label for="phone_number">شماره موبایل  :</label>
+
+                                <input type="text" class="form-control @error('phone_number') {{'is-invalid'}} @enderror" id="phone_number" name="phone_number" placeholder="حروف انگلیسی و فارسی و اعداد . . ." >
+                                @error('phone_number')
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group text-right">
+                                <label for="email">ایمیل :</label>
+
+                                <input type="text" class="form-control @error('email') {{'is-invalid'}} @enderror" id="email" name="email">
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                            <div class="form-group text-right">
+                                <label for="password">رمز عبور :</label>
+                                <input type="password" class="form-control @error('password') {{'is-invalid'}} @enderror" id="password" name="password" placeholder="بین 4 تا 8 کارکتر . . .">
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <div class="form-group text-right">
+                                <label for="password_confirmation"> تکرار رمز عبور :</label>
+                                <input type="password" class="form-control @error('password_confirmation') {{'is-invalid'}} @enderror" id="password_confirmation" name="password_confirmation" placeholder="بین 4 تا 8 کارکتر . . .">
+                                @error('password_confirmation')
+                                    <div id="validationServer03Feedback" class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                @enderror
                             </div>
-                        </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
+                            <div class="form-center text-center">
+                                <button type="submit" class="btn btn-eshop px-5">ثبت‌نام</button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                        <p class="text-center my-5">قبلا ثبت نام کرده اید؟<a href="{{route('login')}}"><b>ورود</b></a></p>
+                    </div>
                 </div>
             </div>
         </div>
