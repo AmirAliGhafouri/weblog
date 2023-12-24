@@ -41,3 +41,14 @@ ul {
 .btn-main:hover {
   background-color: #d8bb00;
 }
+
+/* لینک های هدر */
+.nav-item:hover {
+  color: #fedb01;
+}
+
+.topbar div {
+  background-image: url(../images/backgrounds/hand-using-gadgets-laptop-top-view-blank-screen-with-copyspace-minimalistic-style-technologies-modern-marketing-negative-space-ad-flyer-yellow-color-background-stylish-trendy.jpg);
+  background-size: cover;
+  background-position: center;
+}
