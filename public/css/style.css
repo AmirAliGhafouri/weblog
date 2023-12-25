@@ -42,6 +42,11 @@ ul {
   background-color: #d8bb00;
 }
 
+/* تیتر ها */
+.text-title {
+  color: #fedb01;
+}
+
 /* لوگوی */
 .navbar-brand img {
   width: 90px;
@@ -79,4 +84,23 @@ ul {
 
 .text-justify {
   text-align: justify;
+}
+
+/* پنل ادمین */
+.admin-dashboard {
+  /*  */
+}
+
+.side-bar {
+  height: 100vh;
+}
+
+.side-bar a:hover {
+  background-color: #fedb01;
+  color: #232227 !important;
+}
+
+.active-link {
+  background-color: #fedb01;
+  color: #232227 !important;
 }
