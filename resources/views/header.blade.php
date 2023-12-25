@@ -3,7 +3,6 @@
         <div class="container">
             <!-- لوگوی سایت -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                <!-- {{ config('app.name', 'Laravel') }} -->
                 <img src="{{ URL::asset('images/backgrounds/logo.png') }}" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -26,15 +25,12 @@
                                 <a class="nav-link text-white" href="{{ route('register') }}">ثبت‌نام</a>
                             </li>
                         @endif
+
                     <!-- لینک های کاربرانی که وارد حساب خود شده اند -->
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                            <div aria-labelledby="navbarDropdown">
+                                <a class="nav-link text-white" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                     خروج

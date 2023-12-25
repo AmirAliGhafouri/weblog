@@ -9,6 +9,6 @@ class AdminNewsController extends Controller
 {
     public function adminPanel()
     {
-        return "ok";
+        return "WELCOME Admin";
     }
 }
