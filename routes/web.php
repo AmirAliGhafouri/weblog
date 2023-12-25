@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminNewsController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,10 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/news-details/{id}', [NewsController::class, 'newsDetails'])->name('details');
+
+// مسیر های ادمین
+Route::group(['middleware' => 'admin'], function () {
+    Route::controller(AdminNewsController::class)->group(function(){
+        Route::get('/admin-dashboard', 'adminPanel')->name('admin.dashboard');
+    });
+});

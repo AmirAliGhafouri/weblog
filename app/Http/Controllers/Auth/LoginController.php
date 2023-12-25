@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Gate;
 
 class LoginController extends Controller
 {
@@ -37,4 +38,15 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * مسیری که کاربر بعد از ورود هش هدایت میشه
+     */
+    protected function redirectTo()
+    {
+        if(Gate::allows('isAdmin'))
+            return route('admin.dashboard');
+        return route('home');
+    }
+
 }

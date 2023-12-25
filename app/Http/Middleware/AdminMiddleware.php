@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Gate::denies('isAdmin')) {
+        if (Gate::denies('isAdmin')) {
             abort(403, 'Access denied');
         }
         return $next($request);
