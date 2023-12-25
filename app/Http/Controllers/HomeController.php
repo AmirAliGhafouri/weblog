@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,12 +18,13 @@ class HomeController extends Controller
     } */
 
     /**
-     * Show the application dashboard.
+     * صفحه ی اصلی سایت
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('home');
+        $news = News::all();
+        return view('home', ['news' => $news]);
     }
 }

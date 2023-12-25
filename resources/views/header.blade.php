@@ -3,7 +3,8 @@
         <div class="container">
             <!-- لوگوی سایت -->
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                <!-- {{ config('app.name', 'Laravel') }} -->
+                <img src="{{ URL::asset('images/backgrounds/logo.png') }}" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>

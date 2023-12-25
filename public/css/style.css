@@ -42,13 +42,37 @@ ul {
   background-color: #d8bb00;
 }
 
+/* لوگوی */
+.navbar-brand img {
+  width: 90px;
+  transition: all 0.5s;
+}
+
+.navbar-brand img:hover {
+  transform: scale(1.2, 1.2);
+}
+
 /* لینک های هدر */
-.nav-item:hover {
-  color: #fedb01;
+.nav-link:hover {
+  color: #fedb01 !important;
 }
 
 .topbar div {
   background-image: url(../images/backgrounds/hand-using-gadgets-laptop-top-view-blank-screen-with-copyspace-minimalistic-style-technologies-modern-marketing-negative-space-ad-flyer-yellow-color-background-stylish-trendy.jpg);
   background-size: cover;
   background-position: center;
+}
+
+/* عکس داخل کارت های خبر */
+.card img {
+  transition: all 1s;
+}
+
+.card:hover img {
+  transform: scale(1.1, 1.1);
+}
+
+.card-txt {
+  text-align: justify;
+  font-size: 14px;
 }
