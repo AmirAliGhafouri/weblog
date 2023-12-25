@@ -21,8 +21,10 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/news-details/{id}', [NewsController::class, 'newsDetails'])->name('details');
 
 // مسیر های ادمین
-Route::group(['middleware' => 'admin'], function () {
+Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
     Route::controller(AdminNewsController::class)->group(function(){
-        Route::get('/admin-dashboard', 'adminPanel')->name('admin.dashboard');
+        Route::get('/dashboard', 'adminPanel')->name('admin.dashboard');
+        Route::get('/news-add', 'showNewsAdd')->name('admin.newsAdd');
+        Route::post('/news-add', 'newsAdd')->name('newsAdd');
     });
 });

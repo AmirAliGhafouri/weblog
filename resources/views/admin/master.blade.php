@@ -14,7 +14,7 @@
         <script src="{{URL::asset('bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{URL::asset('icon/all.js')}}"></script>
     </head>
-    <body>
+    <body class="bg-light">
         @include('../header')
         <div class="d-flex">
             <div class="side-bar bg-dark">
@@ -24,7 +24,7 @@
                 </div>
                 <ul class="p-0 mt-3">
                     <li>
-                        <a href="{{ route('admin.dashboard') }}" class="p-3 text-white d-inline-block w-100 @if(request()->is('admin-dashboard')) {{ 'active-link' }} @endif">
+                        <a href="{{ route('admin.dashboard') }}" class="p-3 text-white d-inline-block w-100 @if(request()->is('admin/dashboard')) {{ 'active-link' }} @endif">
                             اخبار
                         </a>
                     </li>

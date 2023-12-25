@@ -9,23 +9,26 @@
     </div>
     
     <!-- اخبار -->
-    <div class="container d-flex justify-content-center flex-wrap my-5">
+    <div>
         <h2 class="text-center my-5">اخبار</h2>
-        @foreach($news as $item)
-            <a href="{{ route('details', ['id' => $item->id]) }}">
-                <div class="aaa card col-md-4 mx-2 ">
-                    <div class="overflow-hidden">
-                        <img class="img-fluid w-100" src='{{URL::asset("$item->image")}}' alt="Card image">
-                    </div>
+        <div class="d-flex flex-wrap justify-content-center align-items-stretch my-5">
+            @foreach($news as $item)
+                <a href="{{ route('details', ['id' => $item->id]) }}" class="card col-md-4 m-3">
                     <div>
-                        <h4 class="my-2 text-center">{{ $item->title }}</h4>
-                        <div class="my-3 p-2 card-txt">
-                            {{ $item->short_text }}
+                        <div class="overflow-hidden">
+                            <img class="img-fluid w-100" src='{{URL::asset("$item->image")}}' alt="Card image">
+                        </div>
+                        <div>
+                            <h4 class="my-2 text-center">{{ $item->title }}</h4>
+                            <div class="my-3 p-2 card-txt">
+                                {{ $item->short_text }}
+                            </div>
+                            <p class="text-start ps-2">{{ $item->created_at }}</p>
                         </div>
                     </div>
-                </div>
-            </a>
-        @endforeach
+                </a>
+            @endforeach
+        </div>
     </div>
 
 @endsection

@@ -30,16 +30,35 @@ ul {
   background-color: #232227;
 }
 
+.bg-title {
+  background-color: #232227 !important;
+  color: #fedb01 !important;
+}
+
 .form-background {
   background-image: url(../images/backgrounds/formBackground.jpg);
+  background-size: cover;
+  background-position: center;
 }
 
 /* دکمه ها */
 .btn-main {
   background-color: #fedb01;
+  transition: add 2s;
 }
 .btn-main:hover {
-  background-color: #d8bb00;
+  background-color: #b9a100;
+  color: #fff;
+}
+
+.btn-title {
+  background-color: #232227;
+  color: #fedb01;
+  transition: all 0.5s;
+}
+.btn-title:hover {
+  background-color: #080808;
+  color: #fedb01;
 }
 
 /* تیتر ها */
@@ -66,6 +85,11 @@ ul {
   background-image: url(../images/backgrounds/hand-using-gadgets-laptop-top-view-blank-screen-with-copyspace-minimalistic-style-technologies-modern-marketing-negative-space-ad-flyer-yellow-color-background-stylish-trendy.jpg);
   background-size: cover;
   background-position: center;
+}
+
+/* عکس های فرم ها */
+.form-img {
+  width: 150px;
 }
 
 /* عکس داخل کارت های خبر */
@@ -103,4 +127,8 @@ ul {
 .active-link {
   background-color: #fedb01;
   color: #232227 !important;
+}
+
+.table-img {
+  max-width: 120px;
 }

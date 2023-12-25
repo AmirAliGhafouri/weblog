@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-md navbar-dark text-white shadow-sm">
         <div class="container">
             <!-- لوگوی سایت -->
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand m-0" href="{{ url('/') }}">
                 <img src="{{ URL::asset('images/backgrounds/logo.png') }}" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -11,18 +11,18 @@
 
             <!-- لینک ها -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav m-auto">
+                <ul class="navbar-nav me-auto">
                     <!-- لینک های کاربرانی که وارد حساب خود نشده اند -->
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('login') }}">ورود</a>
+                                <a class="nav-link text-white" href="{{ route('login') }}">ورود <i class="fa-solid fa-right-to-bracket"></i></a>
                             </li>
                         @endif
 
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('register') }}">ثبت‌نام</a>
+                                <a class="nav-link text-white" href="{{ route('register') }}">ثبت‌نام <i class="fa-solid fa-user-plus"></i></a>
                             </li>
                         @endif
 
@@ -33,7 +33,7 @@
                                 <a class="nav-link text-white" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
-                                    خروج
+                                    خروج <i class="fa-solid fa-right-from-bracket"></i>
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -42,6 +42,11 @@
                             </div>
                         </li>
                     @endguest
+                    @if(Gate::allows('isAdmin'))
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('register') }}">ادمین <i class="fa-solid fa-user"></i></a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>

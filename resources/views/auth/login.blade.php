@@ -6,7 +6,7 @@
             <div class="col-md-12 col-lg-10">
                 <div class="wrap d-md-flex flex-row-reverse my-5 shdow">
                     <div class="col-lg-6 d-flex justify-content-center align-items-center bg-dark">
-                        <img class="img-fluid img-responsive"  src='{{URL::asset("images/backgrounds/login.png")}}'>
+                        <img class="img-fluid img-responsive form-img"  src='{{URL::asset("images/backgrounds/login.png")}}'>
                     </div>
                     <div class="col-lg-6 pl-md-5 bg-white p-5">
                         <h2 class="display-5 text-center mb-5">ورود</h2>
