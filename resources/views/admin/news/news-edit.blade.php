@@ -30,7 +30,7 @@
                         </div>
                         <div class="col-lg-5 pl-md-5 form-container p-5 bg-white">
                             <h2 class="display-5 text-center mb-5"> خبر جدید </h2>
-                            <form method="POST" action="{{ route('newsEdit') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('newsEdit', ['id' => $news->id]) }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group text-right my-4">
                                     <label for="title">عنوان :</label>
