@@ -42,7 +42,7 @@
                     </li>
 
                     <li>
-                        <a href="#" class="p-3 text-white d-inline-block w-100">
+                        <a href="{{ route('admin.category') }}" class="p-3 text-white d-inline-block w-100 @if(request()->is('admin/category*')) {{ 'active-link' }} @endif">
                             دسته بندی ها
                         </a>
                     </li>

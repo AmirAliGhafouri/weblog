@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminNewsController;
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,9 @@ Route::get('/news-details/{id}', [NewsController::class, 'newsDetails'])->name('
 
 // مسیر های ادمین
 Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
-    Route::controller(AdminNewsController::class)->group(function(){
+
+    // اخبار
+    Route::controller(AdminNewsController::class)->group(function () {
         Route::group(['prefix' => 'dashboard'], function () {
             // دسترسی به اخبار
             Route::get('/', 'adminPanel')->name('admin.dashboard');
@@ -43,5 +46,17 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
             Route::get('/news-visible/{id}', 'newsVisible')->name('news.visible');
         });
 
+    });
+
+    // دسته‌بندی ها
+    Route::controller(AdminCategoryController::class)->group(function () {
+        Route::group(['prefix' => 'category'], function () {
+            // دسترسی به دسته‌بندی ها
+            Route::get('/', 'adminCategory')->name('admin.category');
+            
+            // اضافه کردن دسته‌بندی
+            Route::get('/add', 'showAddCategory')->name('admin.addCategory');
+            Route::post('/add', 'addCategory')->name('addCategory');
+        });            
     });
 });
