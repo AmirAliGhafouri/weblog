@@ -93,7 +93,10 @@ ul {
   width: 150px;
 }
 
-/* عکس داخل کارت های خبر */
+/*کارت های خبر */
+.card {
+  position: relative;
+}
 .card img {
   transition: all 1s;
 }
@@ -109,6 +112,12 @@ ul {
 
 .text-justify {
   text-align: justify;
+}
+
+.time-txt {
+  position: absolute;
+  bottom: 3px;
+  left: 3px;
 }
 
 .card-imag-container {

@@ -21,7 +21,7 @@
                 <tr>
                     <th class="bg-title">عنوان خبر</th>
                     <th class="bg-title">تصویر خبر</th>
-                    <th class="bg-title">دسته‌بندی های خبر</th>
+                    <!-- <th class="bg-title">دسته‌بندی های خبر</th> -->
                     <th class="bg-title">وضعیت خبر</th>
                     <th class="bg-title">عملیات</th>
                 </tr>
@@ -36,9 +36,9 @@
                             <img src='{{ URL::asset("$item->image") }}' alt="{{ $item->title }}" class="img-fluid table-img">
                         </td>
 
-                        <td>
+                      <!--   <td>
                             null
-                        </td>
+                        </td> -->
 
                         <td>
                             @if ($item->status)

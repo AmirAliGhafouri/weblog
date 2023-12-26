@@ -20,6 +20,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/news-details/{id}', [NewsController::class, 'newsDetails'])->name('details');
+Route::get('/category/{name}', [NewsController::class, 'ctg'])->name('category');
 
 // مسیر های ادمین
 Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {

@@ -7,8 +7,15 @@
                 <img src='{{ URL::asset("$newsDetails->image") }}' class="img-fluid shadow" alt="{{ $newsDetails->title }}">
             </div>
             <div class="col-lg-6 pl-md-5 d-flex align-items-end">
-                <h2 class="display-4 mb-3">{{ $newsDetails->title }}</h2>
-                <h3>{{ $newsDetails->created_at }}</h3>
+                <div>
+                    <h2 class="display-4 mb-3">{{ $newsDetails->title }}</h2>
+                    <h3>{{ $newsDetails->created_at }}</h3>
+                    <div>
+                        @foreach ($newsCategories as $item)
+                            <a href="{{ route('category', ['name', $item->name]) }}">{{ $item->name }}</a>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
 

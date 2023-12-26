@@ -20,10 +20,10 @@
                         </div>
                         <div>
                             <h4 class="my-2 text-center">{{ $item->title }}</h4>
-                            <div class="my-3 p-2 card-txt">
+                            <div class="mt-3 mb-5 p-2 card-txt">
                                 {{ $item->short_text }}
                             </div>
-                            <p class="text-start ps-2">{{ $item->created_at }}</p>
+                            <p class="time-txt">{{ $item->created_at }}</p>
                         </div>
                     </div>
                 </a>
