@@ -96,8 +96,22 @@ class AdminNewsController extends Controller
      */
     public function newsHide($id)
     {
-        News::findOrFail($id);
+        $news = News::where(['id' => $id, 'status' => 1])->first();
+        if (!$news)
+            return redirect()->route('admin.dashboard')->with('message', 'خبر مورد نظر پیدا نشد ❗');
         News::where('id', $id)->update(['status' => 0]);
         return redirect()->route('admin.dashboard')->with('message', 'خبر موردنظر با موفقیت پنهان شد ✅');
+    }
+
+    /**
+     * آشکار کردن خبر هایی که وضعیتشون عدم نمایش است
+     */
+    public function newsVisible($id)
+    {
+        $news = News::where(['id' => $id, 'status' => 0])->first();
+        if (!$news)
+            return redirect()->route('admin.dashboard')->with('message', 'خبر مورد نظر پیدا نشد ❗');
+        News::where('id', $id)->update(['status' => 1]);
+        return redirect()->route('admin.dashboard')->with('message', 'خبر موردنظر با موفقیت آشکار شد ✅');
     }
 }

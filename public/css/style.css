@@ -64,6 +64,7 @@ ul {
 /* تیتر ها */
 .text-title {
   color: #fedb01;
+  white-space: nowrap;
 }
 
 /* لوگوی */

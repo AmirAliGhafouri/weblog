@@ -38,6 +38,9 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
             // حذف خبر
             Route::get('/news-remove/{id}', 'newsRemove')->name('news.remove');
             Route::get('/news-hide/{id}', 'newsHide')->name('news.hide');
+
+            // آشکار کردن خبر هایی که وضعیتشون عدم نمایش است
+            Route::get('/news-visible/{id}', 'newsVisible')->name('news.visible');
         });
 
     });

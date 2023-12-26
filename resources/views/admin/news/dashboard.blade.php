@@ -7,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    <div class="container bg-light">
+    <div class="px-3 bg-light w-100">
         <div class="w-100 py-4">
             <h1 class="text-center">مدیریت اخبار</h1>
         </div>
@@ -51,7 +51,7 @@
                         <td>
                             <!-- مشاهده‌ی کامل جزپیات خبر -->
                             <a href="{{ route('details', ['id' => $item->id]) }}">
-                                <button class="btn btn-main">مشاهده <i class="fa-solid fa-eye"></i></button>
+                                <button class="btn btn-main">مشاهده <i class="fa-regular fa-folder-open"></i></button>
                             </a>
 
                             <!-- ویرایش خبر -->
@@ -68,18 +68,18 @@
                                     <ul class="dropdown-menu text-center">
                                         <!-- حذف از دیتابیس -->
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('news.remove', ['id' => $item->id]) }}">حذف کامل</a>
+                                            <a class="dropdown-item" href="{{ route('news.remove', ['id' => $item->id]) }}">حذف کامل <i class="fa-solid fa-trash"></i></a>
                                         </li>
 
                                         <!-- تغییر وضعیت به عدم نمایش -->
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('news.hide', ['id' => $item->id]) }}">عدم نمایش</a>
+                                            <a class="dropdown-item" href="{{ route('news.hide', ['id' => $item->id]) }}">عدم نمایش <i class="fa-solid fa-eye-slash"></i></a>
                                         </li>
                                     </ul>
                                 </div>
                             @else
-                                <a href="{{ route('admin.newsEdit', ['id' => $item->id]) }}">
-                                    <button class="btn btn-primary">آشکار کردن</button>
+                                <a href="{{ route('news.visible', ['id' => $item->id]) }}">
+                                    <button class="btn btn-success">آشکار کردن <i class="fa-solid fa-eye"></i></button>
                                 </a>
                             @endif
                         </td>

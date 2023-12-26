@@ -16,7 +16,7 @@
     </head>
     <body class="bg-dark">
         @include('../header')
-        <div class="d-flex align-items-stretch">
+        <div class="d-flex">
             <div class="side-bar bg-dark">
                 <div class="text-center text-title px-2">
                     <h2>داشبورد ادمین</h2>
