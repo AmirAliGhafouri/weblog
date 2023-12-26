@@ -111,9 +111,8 @@ ul {
   text-align: justify;
 }
 
-/* پنل ادمین */
-.admin-dashboard {
-  /*  */
+.card-imag-container {
+  max-height: 300px;
 }
 
 .side-bar {
@@ -132,4 +131,9 @@ ul {
 
 .table-img {
   max-width: 120px;
+}
+
+.table-description {
+  font-size: 12px;
+  max-width: 250px;
 }

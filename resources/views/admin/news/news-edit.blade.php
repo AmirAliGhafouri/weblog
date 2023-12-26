@@ -77,20 +77,32 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-check text-right my-4">
-                                    @foreach($categories as $category)
-                                        <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="flexCheckDefault" name="categories">
+                                <div class="form-check text-right my-4 border rounded p-2">
+                                    <p>حذف دسته‌بندی</p> 
+                                    @foreach ($newsCategories as $category)
+                                        <input type="checkbox" value="{{ $category->id }}" id="flexCheckDefault" name="delete_categories[]">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             {{ $category->name }}
                                         </label>
                                     @endforeach
                                 </div>
 
+                                <div class="form-check text-right my-4 border rounded p-2">
+                                    <p>اضافه کردن دسته‌بندی</p> 
+                                    @foreach ($otherCategories as $category)
+                                        <input type="checkbox" value="{{ $category->id }}" id="flexCheckDefault" name="add_categories[]">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            {{ $category->name }}
+                                        </label>
+                                    @endforeach
+                                </div>
+
+                                
+
                                 <div class="form-center text-center">
-                                    <button type="submit" class="btn btn-main px-5">اضافه کردن</button>
+                                    <button type="submit" class="btn btn-main px-5">تغییر</button>
                                 </div>
                             </form>
-                            <p class="text-center my-5">قبلا ثبت نام کرده اید؟<a href="{{ route('login') }}"><b>ورود</b></a></p>
                         </div>
                     </div>
                 </div>

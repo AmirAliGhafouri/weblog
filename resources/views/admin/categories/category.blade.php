@@ -31,6 +31,14 @@
                             {{ $item->name }}
                         </td>
 
+                        <td class="table-description text-justify">
+                            @if ($item->description)
+                                {{ $item->description }}
+                            @else
+                                <p class="text-center">---------</p>
+                            @endif    
+                        </td>
+
                         <td>
                             @if ($item->status)
                                 آشکار ✅
