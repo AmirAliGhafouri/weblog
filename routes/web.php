@@ -24,11 +24,20 @@ Route::get('/news-details/{id}', [NewsController::class, 'newsDetails'])->name('
 Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
     Route::controller(AdminNewsController::class)->group(function(){
         Route::group(['prefix' => 'dashboard'], function () {
+            // دسترسی به اخبار
             Route::get('/', 'adminPanel')->name('admin.dashboard');
+
+            // اضافه کردن خبر جدید
             Route::get('/news-add', 'showNewsAdd')->name('admin.newsAdd');
             Route::post('/news-add', 'newsAdd')->name('newsAdd');
+
+            // ویرایش خبر
             Route::get('/news-edit/{id}', 'showNewsEdit')->name('admin.newsEdit');
             Route::post('/news-edit/{id}', 'newsEdit')->name('newsEdit');
+
+            // حذف خبر
+            Route::get('/news-remove/{id}', 'newsRemove')->name('news.remove');
+            Route::get('/news-hide/{id}', 'newsHide')->name('news.hide');
         });
 
     });

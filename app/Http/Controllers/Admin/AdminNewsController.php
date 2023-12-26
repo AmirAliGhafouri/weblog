@@ -80,4 +80,15 @@ class AdminNewsController extends Controller
         News::where('id', $req->id)->update($request);
         return redirect()->route('admin.dashboard')->with('message', 'خبر موردنظر با موفقیت ویرایش شد ✅');
     }
+
+    /**
+     *  حذف کامل خبر از دیتابیس
+     */
+    public function newsRemove($id)
+    {
+        News::findOrFail($id);
+        News::destroy($id);
+        return redirect()->route('admin.dashboard')->with('message', 'خبر موردنظر با موفقیت حذف شد ✅');
+
+    }
 }
