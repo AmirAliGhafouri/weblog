@@ -83,13 +83,15 @@ class AdminNewsController extends Controller
         foreach ($allCategoriesId as $item) {
             array_push($CategoriesIdArray, $item->id);
         }
+
         $otherCategoriesId = array_values(array_diff($CategoriesIdArray, $newsCategoriesId));
 
         // دسته‌بندی هایی که به خبر نسبت داده نشده اند
         $otherCategories = [];
         foreach ($otherCategoriesId as $item) {
-            $otherCategories = Category::where('id', $item)->get();
+            array_push($otherCategories, Category::where('id', $item)->first());
         }
+        
         return view('admin.news.news-edit', ['newsCategories' => $newsCategories, 'otherCategories' => $otherCategories, 'news' => $news]);
     }
 

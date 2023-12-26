@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminNewsController;
-use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
