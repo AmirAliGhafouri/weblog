@@ -7,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    <div class="container">
+    <div class="container bg-light">
         <div class="w-100 py-4">
             <h1 class="text-center">مدیریت اخبار</h1>
         </div>
@@ -46,7 +46,7 @@
                             </a>
 
                             <!-- ویرایش خبر -->
-                            <a href="#">
+                            <a href="{{ route('admin.newsEdit', ['id' => $item->id]) }}">
                                 <button class="btn btn-primary">ویرایش <i class="fa-solid fa-pen-to-square"></i></button>
                             </a>
                             <div class="dropdown d-inline">

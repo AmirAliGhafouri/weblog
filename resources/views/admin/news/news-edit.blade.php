@@ -5,12 +5,32 @@
             <div class="row justify-content-center">
                 <div class="col-md-12 col-lg-10">
                     <div class="wrap d-md-flex my-5 flex-row-reverse shdow">
-                        <div class="col-lg-6 d-flex justify-content-center align-items-center bg-dark">
-                            <img class="img-fluid img-responsive rounded product-image"  src='{{URL::asset("images/backgrounds/Registratioin.png")}}'>
+                        <div class="col-lg-7 d-flex justify-content-center align-items-center bg-dark">
+                            <div class="d-flex justifycontent-center flex-column text-white">
+                                <div class="d-flex justify-content-center mb-2">
+                                    <img class="img-fluid img-responsive rounded w-75" src='{{URL::asset("$news->image")}}'>
+                                </div>
+                                <h2 class="text-center mb-3">
+                                    <strong class="text-title">عنوان : </strong>
+                                    {{ $news->title }}
+                                </h2>
+                                <div class="text-justify px-2 mb-3">
+                                    <p>
+                                        <strong class="text-title">متن کوتاه : </strong>
+                                        {{ $news->short_text }}
+                                    </p>
+                                </div>
+                                <div class="text-justify px-2">
+                                    <p>
+                                        <strong class="text-title">متن بلند : </strong>
+                                        {{ $news->long_text }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-lg-6 pl-md-5 form-container p-5 bg-white">
+                        <div class="col-lg-5 pl-md-5 form-container p-5 bg-white">
                             <h2 class="display-5 text-center mb-5"> خبر جدید </h2>
-                            <form method="POST" action="{{ route('newsAdd') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('newsEdit') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group text-right my-4">
                                     <label for="title">عنوان :</label>

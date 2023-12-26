@@ -39,9 +39,19 @@ class AdminNewsController extends Controller
         $dstPath=public_path()."/images/news";
         $req->image->move($dstPath, $fileName);
 
+        // ذخیره اطلاعات در دیتابیس
         $request['image'] = "images/news/$fileName";
-
         News::create($request);
         return redirect()->route('admin.dashboard')->with('message', 'خبر جدید با موفقیت اضافه شد ✅');
+    }
+
+    /**
+     * ویرایش کردن یک خبر
+     */
+    public function showNewsEdit($id)
+    {
+        $news = News::findOrFail($id);
+        $categories = Category::all();
+        return view('admin.news.news-edit', ['categories' => $categories, 'news' => $news]);
     }
 }

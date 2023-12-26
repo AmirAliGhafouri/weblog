@@ -23,8 +23,13 @@ Route::get('/news-details/{id}', [NewsController::class, 'newsDetails'])->name('
 // مسیر های ادمین
 Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
     Route::controller(AdminNewsController::class)->group(function(){
-        Route::get('/dashboard', 'adminPanel')->name('admin.dashboard');
-        Route::get('/news-add', 'showNewsAdd')->name('admin.newsAdd');
-        Route::post('/news-add', 'newsAdd')->name('newsAdd');
+        Route::group(['prefix' => 'dashboard'], function () {
+            Route::get('/', 'adminPanel')->name('admin.dashboard');
+            Route::get('/news-add', 'showNewsAdd')->name('admin.newsAdd');
+            Route::post('/news-add', 'newsAdd')->name('newsAdd');
+            Route::get('/news-edit/{id}', 'showNewsEdit')->name('admin.newsEdit');
+            Route::post('/news-edit/{id}', 'newsEdit')->name('newsEdit');
+        });
+
     });
 });

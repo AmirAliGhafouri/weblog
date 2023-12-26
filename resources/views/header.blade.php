@@ -44,7 +44,7 @@
                     @endguest
                     @if(Gate::allows('isAdmin'))
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('register') }}">ادمین <i class="fa-solid fa-user"></i></a>
+                            <a class="nav-link text-white" href="{{ route('admin.dashboard') }}">ادمین <i class="fa-solid fa-user"></i></a>
                         </li>
                     @endif
                 </ul>
