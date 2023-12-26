@@ -89,6 +89,15 @@ class AdminNewsController extends Controller
         News::findOrFail($id);
         News::destroy($id);
         return redirect()->route('admin.dashboard')->with('message', 'خبر موردنظر با موفقیت حذف شد ✅');
+    }
 
+    /**
+     *  تغییر وضعیت خبر به عدم نمایش
+     */
+    public function newsHide($id)
+    {
+        News::findOrFail($id);
+        News::where('id', $id)->update(['status' => 0]);
+        return redirect()->route('admin.dashboard')->with('message', 'خبر موردنظر با موفقیت پنهان شد ✅');
     }
 }
