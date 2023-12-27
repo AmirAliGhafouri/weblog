@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminNewsController;
 use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/news-details/{id}', [NewsController::class, 'newsDetails'])->name('details');
-Route::get('/category/{name}', [NewsController::class, 'ctg'])->name('category');
+Route::get('/category/{name}', [CategoryController::class, 'categoryNewsShow'])->name('category');
 
 // مسیر های ادمین
 Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
