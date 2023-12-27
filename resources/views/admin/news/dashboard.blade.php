@@ -38,8 +38,11 @@
 
                         <td>
                             @foreach ($item->categories as $category)
-                                <span> {{ $category->name }} ، </span>
+                                <span class="@if(!$category->status) text-danger @endif"> {{ $category->name }} ، </span>
                             @endforeach
+                            @if ($item->categories->all() == [])
+                                <span>-------</span>
+                            @endif
                         </td>
 
                         <td>

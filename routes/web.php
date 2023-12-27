@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminNewsController;
 use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
@@ -73,6 +74,18 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
 
             // نمایش اخبار مربوط به هر دسته‌بندی
             Route::get('/show/{name}', 'categoryNewsShow')->name('category.show');
+        });            
+    });
+
+    // ادمین ها
+    Route::controller(AdminController::class)->group(function () {
+        Route::group(['prefix' => 'admins'], function () {
+            // لیست ادمین ها
+            Route::get('/', 'adminList')->name('admin.list');
+
+            // افزودن ادمین
+            Route::get('/add', 'showAdminAdd')->name('admin.adminsAdd');
+            Route::post('/add', 'adminAdd')->name('adminsAdd');
         });            
     });
 });
