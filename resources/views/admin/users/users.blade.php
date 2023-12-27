@@ -61,7 +61,7 @@
                                 </a>
 
                                 <!-- ویرایش خبر -->
-                                <a href="{{ route('admin.newsEdit', ['id' => $item->id]) }}">
+                                <a href="{{ route('user.remove', ['id' => $item->id]) }}">
                                     <button class="btn btn-danger">حذف <i class="fa-solid fa-trash"></i></button>
                                 </a>
                             @else

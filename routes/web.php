@@ -96,8 +96,8 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
             // لیست کاربران ها
             Route::get('/', 'usersList')->name('admin.users');
 
-            // افزودن ادمین
-            Route::get('/add', 'showAdminAdd')->name('admin.adminsAdd');
+            //  حذف کاربر
+            Route::get('/remove/{id}', 'userRemove')->name('user.remove');
             Route::post('/add', 'adminAdd')->name('adminsAdd');
         });            
     });

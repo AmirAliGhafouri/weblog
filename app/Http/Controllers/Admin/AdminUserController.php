@@ -16,4 +16,16 @@ class AdminUserController extends Controller
         $users = User::all();
         return view('admin.users.users', ['users' => $users]);
     }
+
+    /**
+     * حذف کردن یک کاربر
+     */
+    public function userRemove($id)
+    {
+        $user = User::where(['id' => $id, 'role' => 0])->first();
+        if (!$user)
+            return redirect()->route('admin.users')->with('message', 'کاربر مورد نظر پیدا نشد ❗');
+        $user->delete();
+        return redirect()->route('admin.users')->with('message', 'کاربر مورد نظر با موفقیت حذف شد ✅');
+    }
 }
