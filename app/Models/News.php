@@ -15,4 +15,9 @@ class News extends Model
         'long_text', 
         'image'
     ];
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'news_categories');
+    }
  }

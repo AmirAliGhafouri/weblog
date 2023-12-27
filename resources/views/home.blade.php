@@ -25,8 +25,13 @@
                             </div>
                             <p class="time-txt">{{ $item->created_at }}</p>
                         </div>
+                        <div class="ctg-txt">
+                            @foreach ($item->categories as $category)
+                                <span class="badge bg-warning text-dark">{{ $category->name }}</span>
+                            @endforeach
+                        </div>   
                     </div>
-                </a>
+                </a>              
             @endforeach
         </div>
     </div>

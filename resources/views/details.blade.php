@@ -12,7 +12,7 @@
                     <h3>{{ $newsDetails->created_at }}</h3>
                     <div>
                         @foreach ($newsCategories as $item)
-                            <a href="{{ route('category', ['name', $item->name]) }}">{{ $item->name }}</a>
+                            <a href="{{ route('category', ['name', $item->name]) }}" class="badge bg-warning text-dark mx-2">{{ $item->name }}</a>
                         @endforeach
                     </div>
                 </div>
