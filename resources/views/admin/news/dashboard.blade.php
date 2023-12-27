@@ -17,11 +17,11 @@
         </div>
 
         <div>
-            <table class="table table-hover text-center">
+            <table class="table table-hover text-center shadow">
                 <tr>
                     <th class="bg-title">عنوان خبر</th>
                     <th class="bg-title">تصویر خبر</th>
-                    <!-- <th class="bg-title">دسته‌بندی های خبر</th> -->
+                    <th class="bg-title">دسته‌بندی های خبر</th>
                     <th class="bg-title">وضعیت خبر</th>
                     <th class="bg-title">عملیات</th>
                 </tr>
@@ -36,9 +36,11 @@
                             <img src='{{ URL::asset("$item->image") }}' alt="{{ $item->title }}" class="img-fluid table-img">
                         </td>
 
-                      <!--   <td>
-                            null
-                        </td> -->
+                        <td>
+                            @foreach ($item->categories as $category)
+                                <span> {{ $category->name }} ، </span>
+                            @endforeach
+                        </td>
 
                         <td>
                             @if ($item->status)
@@ -62,7 +64,7 @@
                             @if ($item->status)
                                 <!-- حذف خبر -->
                                 <div class="dropdown d-inline">
-                                    <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-danger dropdown-toggle px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         حذف <i class="fa-solid fa-trash"></i>
                                     </button>
                                     <ul class="dropdown-menu text-center">

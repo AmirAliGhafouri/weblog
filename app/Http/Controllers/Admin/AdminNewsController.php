@@ -19,7 +19,7 @@ class AdminNewsController extends Controller
      */
     public function adminPanel()
     {
-        $news = News::all();
+        $news = News::with('categories')->get();
         return view('admin.news.dashboard', ['news' => $news]);
     }
 
@@ -66,10 +66,10 @@ class AdminNewsController extends Controller
         $news = News::findOrFail($id);
         //دسته‌بندی های نسبت داده شده به خبر
         $newsCategories = DB::table('news_categories')
-                            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-                            ->where('news_id', $id)
-                            ->select('*', 'news_categories.id as news_categories_id', 'categories.id as id')
-                            ->get();
+            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
+            ->where('news_id', $id)
+            ->select('*', 'news_categories.id as news_categories_id', 'categories.id as id')
+            ->get();
 
         // آی‌دی های دسته‌بندی هایی که به خبر نسبت داده شدن
         $newsCategoriesId = [];
@@ -114,7 +114,7 @@ class AdminNewsController extends Controller
             $request['image'] = "images/news/".$fileName;
         }
 
-        if ($req->add_categories){
+        if ($req->add_categories) {
             foreach ($req->add_categories as $item) {
                 NewsCategory::create([
                     'news_id' => $req->id,
@@ -123,7 +123,7 @@ class AdminNewsController extends Controller
             }
         }
 
-        if ($req->delete_categories){
+        if ($req->delete_categories) {
             foreach ($req->delete_categories as $item) {
                 NewsCategory::where(['news_id' => $req->id, 'category_id' => $item])->delete();
             }

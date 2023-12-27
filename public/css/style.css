@@ -146,6 +146,7 @@ ul {
 
 .table-img {
   max-width: 120px;
+  max-height: 100px;
 }
 
 .table-description {
