@@ -5,7 +5,9 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +23,17 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/news-details/{id}', [NewsController::class, 'newsDetails'])->name('details');
 Route::get('/category/{name}', [CategoryController::class, 'categoryNewsShow'])->name('category');
+
+// مسیر های کاربر عادی
+Route::group(['middleware' => 'auth'], function () {
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/user', 'showUserPanel')->name('user.panel');
+        Route::post('/user-edit', 'userEdit')->name('user.edit');
+    });
+});
 
 // مسیر های ادمین
 Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {

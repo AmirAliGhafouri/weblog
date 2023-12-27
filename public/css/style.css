@@ -84,8 +84,11 @@ ul {
 
 .topbar div {
   background-image: url(../images/backgrounds/hand-using-gadgets-laptop-top-view-blank-screen-with-copyspace-minimalistic-style-technologies-modern-marketing-negative-space-ad-flyer-yellow-color-background-stylish-trendy.jpg);
-  background-size: cover;
+  height: 100%; 
+  background-attachment: fixed;
   background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* عکس های فرم ها */

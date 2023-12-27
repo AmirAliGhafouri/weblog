@@ -41,10 +41,14 @@
                                 </form>
                             </div>
                         </li>
+
+                        <li>
+                            <a href="{{ route('user.panel') }}" class="nav-link text-white mx-2">{{ Auth::user()->first_name }} <i class="fa-solid fa-user"></i></a>
+                        </li>
                     @endguest
                     @if (Gate::allows('isAdmin'))
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('admin.dashboard') }}">ادمین <i class="fa-solid fa-user"></i></a>
+                            <a class="nav-link text-white" href="{{ route('admin.dashboard') }}">پنل ادمین <i class="fa-solid fa-user"></i></a>
                         </li>
                     @endif
                 </ul>
