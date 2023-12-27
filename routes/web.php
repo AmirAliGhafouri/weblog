@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminNewsController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
@@ -82,6 +83,18 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
         Route::group(['prefix' => 'admins'], function () {
             // لیست ادمین ها
             Route::get('/', 'adminList')->name('admin.list');
+
+            // افزودن ادمین
+            Route::get('/add', 'showAdminAdd')->name('admin.adminsAdd');
+            Route::post('/add', 'adminAdd')->name('adminsAdd');
+        });            
+    });
+
+    // کاربران
+    Route::controller(AdminUserController::class)->group(function () {
+        Route::group(['prefix' => 'users'], function () {
+            // لیست کاربران ها
+            Route::get('/', 'usersList')->name('admin.users');
 
             // افزودن ادمین
             Route::get('/add', 'showAdminAdd')->name('admin.adminsAdd');
