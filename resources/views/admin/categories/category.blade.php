@@ -13,7 +13,7 @@
         </div>
 
         <div class="my-3">
-            <a href="{{ route('admin.addCategory') }}" class="btn btn-title">افزودن دسته‌بندی جدید <i class="fa-solid fa-circle-plus"></i></a>
+            <a href="{{ route('admin.categoryAdd') }}" class="btn btn-title">افزودن دسته‌بندی جدید <i class="fa-solid fa-circle-plus"></i></a>
         </div>
 
         <div>
@@ -49,12 +49,12 @@
 
                         <td>
                             <!-- مشاهده‌ی خبر های این دسته‌بندی -->
-                            <a href="{{ route('details', ['id' => $item->id]) }}">
+                            <a href="{{ route('category', ['name' => $item->name]) }}">
                                 <button class="btn btn-main">مشاهده <i class="fa-regular fa-folder-open"></i></button>
                             </a>
 
                             <!-- ویرایش دسته‌بندی -->
-                            <a href="{{ route('admin.newsEdit', ['id' => $item->id]) }}">
+                            <a href="{{ route('admin.editCategory', ['id' => $item->id]) }}">
                                 <button class="btn btn-primary">ویرایش <i class="fa-solid fa-pen-to-square"></i></button>
                             </a>
 

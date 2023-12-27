@@ -21,6 +21,6 @@ class CategoryController extends Controller
             ->get();
 
         $categoryDetail = Category::where(['name' => $name, 'status' => 1])->first();
-        return view('category', ['categories' => $categories, 'categoryDetail' => $categoryDetail]);
+            return view('category', ['categories' => $categories, 'categoryDetail' => $categoryDetail]);
     }
 }

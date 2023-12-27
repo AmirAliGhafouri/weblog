@@ -2,10 +2,10 @@
 
 @section('content')
     <div>
-        <h2 class="text-center my-5">{{ $categoryDetail->name }}</h2>
-        @if ($categoryDetail->description)
+        <div class="container">
+            <h2 class="text-center my-5">{{ $categoryDetail->name }}</h2>
             <p class="text-justify">{{ $categoryDetail->description }}</p>
-        @endif
+        </div>
         <div class="d-flex flex-wrap justify-content-center align-items-stretch my-5">
             @foreach($categories as $item)
                 <a href="{{ route('details', ['id' => $item->news_id]) }}" class="card col-md-4 m-3">

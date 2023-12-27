@@ -57,8 +57,15 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
             Route::get('/', 'adminCategory')->name('admin.category');
             
             // اضافه کردن دسته‌بندی
-            Route::get('/add', 'showAddCategory')->name('admin.addCategory');
-            Route::post('/add', 'addCategory')->name('addCategory');
+            Route::get('/add', 'showCategoryAdd')->name('admin.categoryAdd');
+            Route::post('/add', 'addCategory')->name('categoryAdd');
+
+            // ویرایش دسته‌بندی
+            Route::get('/edit/{id}', 'showCategoryEdit')->name('admin.editCategory');
+            Route::post('/edit/{id}', 'categoryEdit')->name('editCategory');
+
+            // دسته‌بندی
+            Route::get('/hide/{id}', 'categoryHide')->name('category.hide');
         });            
     });
 });
