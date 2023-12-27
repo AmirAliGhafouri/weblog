@@ -49,7 +49,7 @@
 
                         <td>
                             <!-- مشاهده‌ی خبر های این دسته‌بندی -->
-                            <a href="{{ route('category', ['name' => $item->name]) }}">
+                            <a href="{{ route('category.show', ['name' => $item->name]) }}">
                                 <button class="btn btn-main">مشاهده <i class="fa-regular fa-folder-open"></i></button>
                             </a>
 
@@ -61,7 +61,7 @@
                             @if ($item->status)
                                 <!-- حذف دسته‌بندی -->
                                 <div class="dropdown d-inline">
-                                    <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-danger dropdown-toggle px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         حذف <i class="fa-solid fa-trash"></i>
                                     </button>
                                     <ul class="dropdown-menu text-center">
@@ -72,12 +72,12 @@
 
                                         <!-- تغییر وضعیت به عدم نمایش -->
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('news.hide', ['id' => $item->id]) }}">عدم نمایش <i class="fa-solid fa-eye-slash"></i></a>
+                                            <a class="dropdown-item" href="{{ route('category.hide', ['id' => $item->id]) }}">عدم نمایش <i class="fa-solid fa-eye-slash"></i></a>
                                         </li>
                                     </ul>
                                 </div>
                             @else
-                                <a href="{{ route('news.visible', ['id' => $item->id]) }}">
+                                <a href="{{ route('category.visible', ['id' => $item->id]) }}">
                                     <button class="btn btn-success">آشکار کردن <i class="fa-solid fa-eye"></i></button>
                                 </a>
                             @endif

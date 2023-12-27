@@ -24,7 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $news = News::with('categories')->where('status', 1)->get();
+        $news = News::with(['categories' => function ($query) {
+            $query->where('status', 1);
+        }])
+        ->where('status', 1)
+        ->get();
         return view('home', ['news' => $news]);
     }
 }

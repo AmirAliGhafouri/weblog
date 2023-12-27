@@ -66,6 +66,13 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
 
             // دسته‌بندی
             Route::get('/hide/{id}', 'categoryHide')->name('category.hide');
+
+            // آشکار کردن خبر هایی که وضعیتشون عدم نمایش است
+            Route::get('/remove/{id}', 'categoryRemove')->name('category.remove');
+            Route::get('/visible/{id}', 'categoryVisible')->name('category.visible');
+
+            // نمایش اخبار مربوط به هر دسته‌بندی
+            Route::get('/show/{name}', 'categoryNewsShow')->name('category.show');
         });            
     });
 });

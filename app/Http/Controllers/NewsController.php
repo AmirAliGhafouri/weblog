@@ -16,7 +16,7 @@ class NewsController extends Controller
         $newsDetail = News::findOrFail($newsId);
         $newsCategories = DB::table('news_categories')
             ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-            ->where('news_id', $newsId)
+            ->where(['news_id' => $newsId, 'categories.status' => 1])
             ->select('*')
             ->get();
 
