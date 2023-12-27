@@ -56,7 +56,7 @@
 
                         <td>
                             @if (!$item->role)
-                                <a href="{{ route('details', ['id' => $item->id]) }}">
+                                <a href="{{ route('makeAdmin', ['id' => $item->id]) }}">
                                     <button class="btn btn-main">تغییر به ادمین <i class="fa-solid fa-user"></i></button>
                                 </a>
 

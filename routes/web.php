@@ -98,7 +98,9 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
 
             //  حذف کاربر
             Route::get('/remove/{id}', 'userRemove')->name('user.remove');
-            Route::post('/add', 'adminAdd')->name('adminsAdd');
+
+            // تبدیل کاربر عادی به ادمین
+            Route::get('/make-admin/{id}', 'makeAdmin')->name('makeAdmin');
         });            
     });
 });

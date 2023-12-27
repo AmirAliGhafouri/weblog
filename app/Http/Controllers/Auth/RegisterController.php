@@ -76,4 +76,13 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    /**
+     * مسیری که کاربر بعد از ورود هش هدایت میشه
+     */
+    protected function redirectTo()
+    {
+        return route('home');
+    }
+
 }

@@ -28,4 +28,18 @@ class AdminUserController extends Controller
         $user->delete();
         return redirect()->route('admin.users')->with('message', 'کاربر مورد نظر با موفقیت حذف شد ✅');
     }
+
+    /**
+     * تبدیل کاربر عادی به ادمین
+     */
+    public function makeAdmin($id)
+    {
+        $user = User::where(['id' => $id, 'role' => 0]);
+        if (!$user)
+            return redirect()->route('admin.users')->with('message', 'کاربر مورد نظر پیدا نشد ❗');
+        $user->update(['role' => 1]);
+        return redirect()->route('admin.users')->with('message', 'کاربر مورد نظر با موفقیت به ادمین تبدیل شد ✅');
+
+
+    }
 }

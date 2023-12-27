@@ -28,6 +28,12 @@
                             اخبار
                         </a>
                     </li>
+                    
+                    <li>
+                        <a href="{{ route('admin.category') }}" class="p-3 text-white d-inline-block w-100 @if(request()->is('admin/category*')) {{ 'active-link' }} @endif">
+                            دسته بندی ها
+                        </a>
+                    </li>
 
                     <li>
                         <a href="{{ route('admin.users') }}" class="p-3 text-white d-inline-block w-100 @if(request()->is('admin/users*')) {{ 'active-link' }} @endif"">
@@ -38,12 +44,6 @@
                     <li>
                         <a href="{{ route('admin.list') }}" class="p-3 text-white d-inline-block w-100 @if(request()->is('admin/admins*')) {{ 'active-link' }} @endif">
                             ادمین ها
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{{ route('admin.category') }}" class="p-3 text-white d-inline-block w-100 @if(request()->is('admin/category*')) {{ 'active-link' }} @endif">
-                            دسته بندی ها
                         </a>
                     </li>
                 </ul>
