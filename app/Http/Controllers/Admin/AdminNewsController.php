@@ -17,7 +17,7 @@ class AdminNewsController extends Controller
     /**
      * صفحه‌ی عملیات مربوط به اخبار 
      */
-    public function adminPanel()
+    public function panel()
     {
         $news = News::with('categories')->get();
         return view('admin.news.dashboard', ['news' => $news]);
@@ -29,13 +29,13 @@ class AdminNewsController extends Controller
     public function showNewsAdd()
     {
         $categories = Category::all();
-        return view('admin.news.news-add', ['categories' => $categories]);
+        return view('admin.news.news_add', ['categories' => $categories]);
     }
 
     /**
      * اضافه کردن خبر
      */
-    public function newsAdd(CreateNewsRequest $req)
+    public function add(CreateNewsRequest $req)
     {
         $request = collect($req->validated())->except(['image', 'categories'])->toArray();
         // ذخیره تصویر
@@ -92,13 +92,13 @@ class AdminNewsController extends Controller
             array_push($otherCategories, Category::where('id', $item)->first());
         }
         
-        return view('admin.news.news-edit', ['newsCategories' => $newsCategories, 'otherCategories' => $otherCategories, 'news' => $news]);
+        return view('admin.news.news_edit', ['newsCategories' => $newsCategories, 'otherCategories' => $otherCategories, 'news' => $news]);
     }
 
     /**
      * ویرایش کردن یک خبر
      */
-    public function newsEdit(UpdateNewsRequest $req)
+    public function edit(UpdateNewsRequest $req)
     {
         // چک کردن درست بودن آی‌دی
         News::findOrFail($req->id);
@@ -138,7 +138,7 @@ class AdminNewsController extends Controller
     /**
      *  حذف کامل خبر از دیتابیس
      */
-    public function newsRemove($id)
+    public function remove($id)
     {
         News::findOrFail($id);
         News::destroy($id);
@@ -149,7 +149,7 @@ class AdminNewsController extends Controller
     /**
      *  تغییر وضعیت خبر به عدم نمایش
      */
-    public function newsHide($id)
+    public function hide($id)
     {
         $news = News::where(['id' => $id, 'status' => 1])->first();
         if (!$news)
@@ -161,7 +161,7 @@ class AdminNewsController extends Controller
     /**
      * آشکار کردن خبر هایی که وضعیتشون عدم نمایش است
      */
-    public function newsVisible($id)
+    public function visible($id)
     {
         $news = News::where(['id' => $id, 'status' => 0])->first();
         if (!$news)

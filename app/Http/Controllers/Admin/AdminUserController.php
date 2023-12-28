@@ -11,7 +11,7 @@ class AdminUserController extends Controller
     /**
      * صفحه‌ی اصلی مدیریت کاربران
      */
-    public function usersList()
+    public function list()
     {
         $users = User::all();
         return view('admin.users.users', ['users' => $users]);
@@ -20,7 +20,7 @@ class AdminUserController extends Controller
     /**
      * حذف کردن یک کاربر
      */
-    public function userRemove($id)
+    public function remove($id)
     {
         $user = User::where(['id' => $id, 'role' => 0])->first();
         if (!$user)

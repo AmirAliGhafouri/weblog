@@ -12,7 +12,7 @@ class AdminController extends Controller
     /**
      * لیست همه‌ی ادمین ها
      */
-    public function adminList()
+    public function list()
     {
         $admins = User::where('role', 1)->get();
         return view('admin.admins.admins', ['admins' => $admins]);
@@ -23,13 +23,13 @@ class AdminController extends Controller
      */
     public function showAdminAdd()
     {
-        return view('admin.admins.admin-add');
+        return view('admin.admins.admin_add');
     }
 
     /**
      *  افزودن ادمین جدید
      */
-    public function adminAdd(CreateAdminRequest $req)
+    public function add(CreateAdminRequest $req)
     {
         $request = collect($req->validated())->toArray();
         $request['role'] = 1;
