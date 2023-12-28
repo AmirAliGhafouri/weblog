@@ -107,7 +107,7 @@ class AdminNewsController extends Controller
             'newsCategories' => $newsCategories, 
             'otherCategories' => $otherCategories, 
             'news' => $news
-            ]);
+        ]);
     }
 
     /**

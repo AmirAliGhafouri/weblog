@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+/**
+ * مدیریت کاربران توسط ادمین
+ */
 class AdminUserController extends Controller
 {
     /**
@@ -14,7 +17,7 @@ class AdminUserController extends Controller
     public function list()
     {
         $users = User::all();
-        return view('admin.users.users', ['users' => $users]);
+        return view('admin.user.users', ['users' => $users]);
     }
 
     /**
@@ -22,11 +25,24 @@ class AdminUserController extends Controller
      */
     public function remove($id)
     {
+        // برسی وجود کاربر
         $user = User::where(['id' => $id, 'role' => 0])->first();
-        if (!$user)
-            return redirect()->route('admin.users')->with('message', 'کاربر مورد نظر پیدا نشد ❗');
-        $user->delete();
-        return redirect()->route('admin.users')->with('message', 'کاربر مورد نظر با موفقیت حذف شد ✅');
+        if (!$user) {
+            return redirect()
+                ->route('admin.users')
+                ->with('message', 'کاربر مورد نظر پیدا نشد ❗');
+        }
+
+        // حذف کاربر از دیتابیس
+        $destroy = User::destroy($id);
+        if (!$destroy) {
+            return redirect()
+                ->route('admin.users')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+        }
+        return redirect()
+            ->route('admin.users')
+            ->with('message', 'کاربر مورد نظر با موفقیت حذف شد ✅');
     }
 
     /**
@@ -34,12 +50,23 @@ class AdminUserController extends Controller
      */
     public function makeAdmin($id)
     {
+        // برسی وجود کاربر و ادمین نبودنش
         $user = User::where(['id' => $id, 'role' => 0]);
-        if (!$user)
-            return redirect()->route('admin.users')->with('message', 'کاربر مورد نظر پیدا نشد ❗');
-        $user->update(['role' => 1]);
-        return redirect()->route('admin.users')->with('message', 'کاربر مورد نظر با موفقیت به ادمین تبدیل شد ✅');
+        if (!$user) {
+            return redirect()
+                ->route('admin.users')
+                ->with('message', 'کاربر مورد نظر پیدا نشد ❗');
+        }
 
-
+        // تغییر وضعیت به ادمین
+        $userUpdate = $user->update(['role' => 1]);
+        if (!$userUpdate) {
+            return redirect()
+                ->route('admin.users')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+        }
+        return redirect()
+            ->route('admin.users')
+            ->with('message', 'کاربر مورد نظر با موفقیت به ادمین تبدیل شد ✅');
     }
 }
