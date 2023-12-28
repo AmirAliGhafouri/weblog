@@ -7,6 +7,9 @@ use App\Http\Requests\CreateAdminRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+/**
+ *  مدیریت ادمین توسط ادمین
+ */
 class AdminController extends Controller
 {
     /**
@@ -15,7 +18,7 @@ class AdminController extends Controller
     public function list()
     {
         $admins = User::where('role', 1)->get();
-        return view('admin.admins.admins', ['admins' => $admins]);
+        return view('admin.admin.admins', ['admins' => $admins]);
     }
 
     /**
@@ -23,7 +26,7 @@ class AdminController extends Controller
      */
     public function showAdminAdd()
     {
-        return view('admin.admins.admin_add');
+        return view('admin.admin.admin_add');
     }
 
     /**
@@ -33,7 +36,16 @@ class AdminController extends Controller
     {
         $request = collect($req->validated())->toArray();
         $request['role'] = 1;
-        User::create($request);
-        return redirect()->route('admin.list')->with('message', 'ادمین جدید با موفقیت اضافه شد ✅');
+
+        // افزودن ادمین
+        $admin = User::create($request);
+        if (!$admin) {
+            return redirect()
+                ->route('admin.list')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+        }
+        return redirect()
+            ->route('admin.list')
+            ->with('message', 'ادمین جدید با موفقیت اضافه شد ✅');
     }
 }
