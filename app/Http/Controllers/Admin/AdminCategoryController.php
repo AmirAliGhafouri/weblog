@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * مدیریت دسته‌بندی ها
+ * مدیریت دسته‌بندی ها توسط ادمین
  */
 class AdminCategoryController extends Controller
 {

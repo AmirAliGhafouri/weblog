@@ -12,6 +12,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * مدیریت اخبار توسط ادمین
+ */
 class AdminNewsController extends Controller
 {
     /**
@@ -33,29 +36,36 @@ class AdminNewsController extends Controller
     }
 
     /**
-     * اضافه کردن خبر
+     * دریافت اطلاعات خبر و پالایش اطلاعات و اضافه کردن خبر
      */
-    public function add(CreateNewsRequest $req)
+    public function add(CreateNewsRequest $request)
     {
-        $request = collect($req->validated())->except(['image', 'categories'])->toArray();
+        $newsDetails = collect($request->validated())->except(['image', 'categories'])->toArray();
         // ذخیره تصویر
-        $fileName = $req->image->getClientOriginalName();
-        $dstPath = public_path()."/images/news";
-        $req->image->move($dstPath, $fileName);
+        $fileName = Carbon::now()->getTimestamp().$request->image->getClientOriginalName();
+        $destinationPath = public_path()."/images/news";
+        $request->image->move($destinationPath, $fileName);
 
         // ذخیره اطلاعات در دیتابیس
-        $request['image'] = "images/news/$fileName";
-        $news = News::create($request);
+        $newsDetails['image'] = "images/news/$fileName";
+        $news = News::create($newsDetails);
+        if (!$news) {
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+        }
 
         // اضافه کردن دسته‌بندی ها
-        foreach ($req->categories as $category_id) {
+        foreach ($request->categories as $category_id) {
             NewsCategory::create([
                 'news_id' => $news->id,
                 'category_id' => $category_id
             ]);
         }
 
-        return redirect()->route('admin.dashboard')->with('message', 'خبر جدید با موفقیت اضافه شد ✅');
+        return redirect()->
+            route('admin.dashboard')->
+            with('message', 'خبر جدید با موفقیت اضافه شد ✅');
     }
 
     /**
@@ -64,6 +74,7 @@ class AdminNewsController extends Controller
     public function showNewsEdit($id)
     {
         $news = News::findOrFail($id);
+
         //دسته‌بندی های نسبت داده شده به خبر
         $newsCategories = DB::table('news_categories')
             ->join('categories', 'news_categories.category_id', '=', 'categories.id')
@@ -92,47 +103,64 @@ class AdminNewsController extends Controller
             array_push($otherCategories, Category::where('id', $item)->first());
         }
         
-        return view('admin.news.news_edit', ['newsCategories' => $newsCategories, 'otherCategories' => $otherCategories, 'news' => $news]);
+        return view('admin.news.news_edit', [
+            'newsCategories' => $newsCategories, 
+            'otherCategories' => $otherCategories, 
+            'news' => $news
+            ]);
     }
 
     /**
-     * ویرایش کردن یک خبر
+     * پالایش اطلاعات و ویرایش کردن یک خبر
      */
-    public function edit(UpdateNewsRequest $req)
+    public function edit(UpdateNewsRequest $request)
     {
         // چک کردن درست بودن آی‌دی
-        News::findOrFail($req->id);
-        $request = collect($req->validated())->filter(function ($item) {
+        News::findOrFail($request->id);
+
+        // حذف فیلد های خالی
+        $newsEdit = collect($request->validated())->filter(function ($item) {
             return $item != null;
         })->toArray();
 
         // ذخیره کردن عکس در صورت وجود
-        if ($req->image) {
-            $fileName = Carbon::now()->getTimestamp().$req->image->getClientOriginalName();
-            $dstPath = public_path()."/images/news";
-            $req->image->move($dstPath, $fileName);
-            $request['image'] = "images/news/".$fileName;
+        if ($request->image) {
+            $fileName = Carbon::now()->getTimestamp().$request->image->getClientOriginalName();
+            $destinationPath = public_path()."/images/news";
+            $request->image->move($destinationPath, $fileName);
+            $newsEdit['image'] = "images/news/".$fileName;
         }
 
-        if ($req->add_categories) {
-            foreach ($req->add_categories as $item) {
+        // اضافه کردن دسته‌بندی های جدید در صورن وجود
+        if ($request->add_categories) {
+            foreach ($request->add_categories as $item) {
                 NewsCategory::create([
-                    'news_id' => $req->id,
+                    'news_id' => $request->id,
                     'category_id' => $item
                 ]);
             }
         }
 
-        if ($req->delete_categories) {
-            foreach ($req->delete_categories as $item) {
-                NewsCategory::where(['news_id' => $req->id, 'category_id' => $item])->delete();
+        // حذف دسته‌بندی های خبر در صورت وجود
+        if ($request->delete_categories) {
+            foreach ($request->delete_categories as $item) {
+                NewsCategory::where([
+                    'news_id' => $request->id, 
+                    'category_id' => $item
+                ])->delete();
             }
         }
 
-
         // ذخیره اطلاعات در دیتابیس
-        News::where('id', $req->id)->update($request);
-        return redirect()->route('admin.dashboard')->with('message', 'خبر موردنظر با موفقیت ویرایش شد ✅');
+        $news = News::where('id', $request->id)->update($newsEdit);
+        if (!$news) {
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+        }
+        return redirect()
+            ->route('admin.dashboard')
+            ->with('message', 'خبر موردنظر با موفقیت ویرایش شد ✅');
     }
 
     /**
@@ -141,8 +169,23 @@ class AdminNewsController extends Controller
     public function remove($id)
     {
         News::findOrFail($id);
-        News::destroy($id);
-        NewsCategory::where('news_id', $id)->delete();
+
+        // خذف از دیتابیس
+        $destroy = News::destroy($id);
+        if (!$destroy) {
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+        }
+
+        // حذف رکورد های که دسته‌بندی ای به خبر حذف شده اختصاص داشت
+        $newsCategory = NewsCategory::where('news_id', $id)->delete();
+        if (!$newsCategory) {
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+        }
+
         return redirect()->route('admin.dashboard')->with('message', 'خبر موردنظر با موفقیت حذف شد ✅');
     }
 
@@ -151,11 +194,25 @@ class AdminNewsController extends Controller
      */
     public function hide($id)
     {
+        // برسی وجود خبر
         $news = News::where(['id' => $id, 'status' => 1])->first();
-        if (!$news)
-            return redirect()->route('admin.dashboard')->with('message', 'خبر مورد نظر پیدا نشد ❗');
-        News::where('id', $id)->update(['status' => 0]);
-        return redirect()->route('admin.dashboard')->with('message', 'خبر موردنظر با موفقیت پنهان شد ✅');
+        if (!$news) {
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('message', 'خبر مورد نظر پیدا نشد ❗');
+        }
+
+        // تغییر وضعیت به عدم نمایش
+        $hide = News::where('id', $id)->update(['status' => 0]);
+        if (!$hide) {
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+        }
+
+        return redirect()
+            ->route('admin.dashboard')
+            ->with('message', 'خبر موردنظر با موفقیت پنهان شد ✅');
     }
 
     /**
@@ -164,9 +221,21 @@ class AdminNewsController extends Controller
     public function visible($id)
     {
         $news = News::where(['id' => $id, 'status' => 0])->first();
-        if (!$news)
-            return redirect()->route('admin.dashboard')->with('message', 'خبر مورد نظر پیدا نشد ❗');
-        News::where('id', $id)->update(['status' => 1]);
-        return redirect()->route('admin.dashboard')->with('message', 'خبر موردنظر با موفقیت آشکار شد ✅');
+        if (!$news) {
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('message', 'خبر مورد نظر پیدا نشد ❗');
+        }
+
+        $visible = News::where('id', $id)->update(['status' => 1]);
+        if (!$visible) {
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+        }
+
+        return redirect()
+            ->route('admin.dashboard')
+            ->with('message', 'خبر موردنظر با موفقیت آشکار شد ✅');
     }
 }
