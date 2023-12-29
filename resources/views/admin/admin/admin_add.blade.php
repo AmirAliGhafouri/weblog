@@ -1,7 +1,6 @@
-@extends('layouts.default.master')
-
+@extends('layouts.admin.master')
 @section('content')
-    <div class="form-background">
+    <div class="form-background w-100">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 col-lg-10">
@@ -10,8 +9,8 @@
                             <img class="img-fluid img-responsive rounded form-img"  src='{{URL::asset("images/backgrounds/Registratioin.png")}}'>
                         </div>
                         <div class="col-lg-6 pl-md-5 form-container p-5 bg-white">
-                            <h2 class="display-5 text-center mb-5"> ثبت‌نام </h2>
-                            <form method="POST" action="{{ route('register') }}">
+                            <h2 class="display-5 text-center mb-5"> افزودن ادمین جدید </h2>
+                            <form method="POST" action="{{ route('adminsAdd') }}">
                                 @csrf
                                 <div class="form-group text-right my-4">
                                     <label for="first_name">نام :</label>
@@ -92,7 +91,6 @@
                                     <button type="submit" class="btn btn-main px-5">ثبت‌نام</button>
                                 </div>
                             </form>
-                            <p class="text-center my-5">قبلا ثبت نام کرده اید؟<a href="{{ route('login') }}"><b>ورود</b></a></p>
                         </div>
                     </div>
                 </div>

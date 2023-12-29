@@ -1,4 +1,5 @@
-@extends('../master')
+@extends('layouts.default.master')
+
 @section('content')
 <div class="form-background">
     <div class="container">

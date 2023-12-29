@@ -15,7 +15,7 @@
         <script src="{{URL::asset('icon/all.js')}}"></script>
     </head>
     <body class="bg-dark">
-        @include('../header')
+        @include('layouts.default.header')
         <div class="d-flex">
             <div class="side-bar bg-dark">
                 <div class="text-center text-title px-2">
@@ -51,6 +51,6 @@
 
             @yield('content')
         </div>
-        @include('../footer')
+        @include('layouts.default.footer')
     </body>
 </html>

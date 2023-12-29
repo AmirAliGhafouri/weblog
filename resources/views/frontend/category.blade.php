@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.default.master')
 
 @section('content')
     <div>

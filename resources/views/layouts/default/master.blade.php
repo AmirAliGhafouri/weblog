@@ -14,8 +14,8 @@
         <script src="{{URL::asset('icon/all.js')}}"></script>
     </head>
     <body>
-        @include('header')
+        @include('layouts.default.header')
         @yield('content')
-        @include('footer')
+        @include('layouts.default.footer')
     </body>
 </html>

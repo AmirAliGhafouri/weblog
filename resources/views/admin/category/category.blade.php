@@ -9,40 +9,34 @@
     @endif
     <div class="px-3 bg-light w-100">
         <div class="w-100 py-4">
-            <h1 class="text-center">مدیریت اخبار</h1>
+            <h1 class="text-center">مدیریت دسته‌بندی ها</h1>
         </div>
 
         <div class="my-3">
-            <a href="{{ route('admin.newsAdd') }}" class="btn btn-title">افزودن خبر جدید <i class="fa-solid fa-circle-plus"></i></a>
+            <a href="{{ route('admin.categoryAdd') }}" class="btn btn-title">افزودن دسته‌بندی جدید <i class="fa-solid fa-circle-plus"></i></a>
         </div>
 
         <div>
-            <table class="table table-hover text-center shadow">
+            <table class="table table-hover text-center">
                 <tr>
-                    <th class="bg-title">عنوان خبر</th>
-                    <th class="bg-title">تصویر خبر</th>
-                    <th class="bg-title">دسته‌بندی های خبر</th>
-                    <th class="bg-title">وضعیت خبر</th>
+                    <th class="bg-title">عنوان</th>
+                    <th class="bg-title">توضیحات</th>
+                    <th class="bg-title">وضعیت دسته‌بندی</th>
                     <th class="bg-title">عملیات</th>
                 </tr>
 
-                @foreach($news as $item)
+                @foreach($categories as $item)
                     <tr>
                         <td>
-                            {{ $item->title }}
+                            {{ $item->name }}
                         </td>
 
-                        <td>
-                            <img src='{{ URL::asset("$item->image") }}' alt="{{ $item->title }}" class="img-fluid table-img">
-                        </td>
-
-                        <td>
-                            @foreach ($item->categories as $category)
-                                <span class="@if(!$category->status) text-danger @endif"> {{ $category->name }} ، </span>
-                            @endforeach
-                            @if ($item->categories->all() == [])
-                                <span>-------</span>
-                            @endif
+                        <td class="table-description text-justify">
+                            @if ($item->description)
+                                {{ $item->description }}
+                            @else
+                                <p class="text-center">---------</p>
+                            @endif    
                         </td>
 
                         <td>
@@ -54,18 +48,18 @@
                         </td>
 
                         <td>
-                            <!-- مشاهده‌ی کامل جزپیات خبر -->
-                            <a href="{{ route('details', ['id' => $item->id]) }}">
+                            <!-- مشاهده‌ی خبر های این دسته‌بندی -->
+                            <a href="{{ route('category.show', ['name' => $item->name]) }}">
                                 <button class="btn btn-main">مشاهده <i class="fa-regular fa-folder-open"></i></button>
                             </a>
 
-                            <!-- ویرایش خبر -->
-                            <a href="{{ route('admin.newsEdit', ['id' => $item->id]) }}">
+                            <!-- ویرایش دسته‌بندی -->
+                            <a href="{{ route('admin.editCategory', ['id' => $item->id]) }}">
                                 <button class="btn btn-primary">ویرایش <i class="fa-solid fa-pen-to-square"></i></button>
                             </a>
 
                             @if ($item->status)
-                                <!-- حذف خبر -->
+                                <!-- حذف دسته‌بندی -->
                                 <div class="dropdown d-inline">
                                     <button class="btn btn-danger dropdown-toggle px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         حذف <i class="fa-solid fa-trash"></i>
@@ -78,12 +72,12 @@
 
                                         <!-- تغییر وضعیت به عدم نمایش -->
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('news.hide', ['id' => $item->id]) }}">عدم نمایش <i class="fa-solid fa-eye-slash"></i></a>
+                                            <a class="dropdown-item" href="{{ route('category.hide', ['id' => $item->id]) }}">عدم نمایش <i class="fa-solid fa-eye-slash"></i></a>
                                         </li>
                                     </ul>
                                 </div>
                             @else
-                                <a href="{{ route('news.visible', ['id' => $item->id]) }}">
+                                <a href="{{ route('category.visible', ['id' => $item->id]) }}">
                                     <button class="btn btn-success">آشکار کردن <i class="fa-solid fa-eye"></i></button>
                                 </a>
                             @endif

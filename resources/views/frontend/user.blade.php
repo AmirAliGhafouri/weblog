@@ -1,4 +1,5 @@
-@extends('master')
+@extends('layouts.default.master')
+
 @section('content')
     <div class="form-background w-100 py-5">
         <div class="container">

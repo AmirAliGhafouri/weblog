@@ -32,13 +32,13 @@ class AdminController extends Controller
     /**
      *  افزودن ادمین جدید
      */
-    public function add(CreateAdminRequest $req)
+    public function add(CreateAdminRequest $request)
     {
-        $request = collect($req->validated())->toArray();
-        $request['role'] = 1;
+        $newAdmin = collect($request->validated())->toArray();
+        $newAdmin['role'] = 1;
 
         // افزودن ادمین
-        $admin = User::create($request);
+        $admin = User::create($newAdmin);
         if (!$admin) {
             return redirect()
                 ->route('admin.list')
