@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 /**
  * مدیریت کاربران توسط ادمین
  */
-class AdminUserController extends Controller
+class AdminUserController extends AdminController
 {
     /**
      * صفحه‌ی اصلی مدیریت کاربران

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Models\Category;
@@ -15,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * مدیریت اخبار توسط ادمین
  */
-class AdminNewsController extends Controller
+class AdminNewsController extends AdminController
 {
     /**
      * صفحه‌ی عملیات مربوط به اخبار 

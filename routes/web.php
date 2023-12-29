@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAdminController;
 use App\Http\Controllers\Admin\AdminNewsController;
 use App\Http\Controllers\Admin\AdminCategoryController;
-use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -89,7 +89,7 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
     });
 
     // ادمین ها
-    Route::controller(AdminController::class)->group(function () {
+    Route::controller(AdminAdminController::class)->group(function () {
         Route::group(['prefix' => 'admins'], function () {
             // لیست ادمین ها
             Route::get('/', 'list')->name('admin.list');

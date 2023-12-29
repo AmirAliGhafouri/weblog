@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
@@ -13,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * مدیریت دسته‌بندی ها توسط ادمین
  */
-class AdminCategoryController extends Controller
+class AdminCategoryController extends AdminController
 {
     /**
      * صفحه‌ی عملیات مربوط به دسته‌بندی ها 
