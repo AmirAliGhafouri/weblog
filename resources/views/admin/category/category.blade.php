@@ -67,7 +67,7 @@
                                     <ul class="dropdown-menu text-center">
                                         <!-- حذف از دیتابیس -->
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('news.remove', ['id' => $item->id]) }}">حذف کامل <i class="fa-solid fa-trash"></i></a>
+                                            <a class="dropdown-item" href="{{ route('category.remove', ['id' => $item->id]) }}">حذف کامل <i class="fa-solid fa-trash"></i></a>
                                         </li>
 
                                         <!-- تغییر وضعیت به عدم نمایش -->

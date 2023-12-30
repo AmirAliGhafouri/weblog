@@ -6,9 +6,7 @@ use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Models\News;
-use App\Models\NewsCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 /**
  * مدیریت دسته‌بندی ها توسط ادمین
@@ -96,14 +94,6 @@ class AdminCategoryController extends AdminController
         // پاک کردن از دیتابیس
         $destroy = Category::destroy($id);
         if (!$destroy) {
-            return redirect()
-                ->route('admin.category')
-                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
-        }
-
-        // پاک کردن رکورد هایی که این کتگوری به خبری اختصاص داده شده بوند
-        $removeNewsCategory = NewsCategory::where('category_id', $id)->delete();
-        if (!$removeNewsCategory) {
             return redirect()
                 ->route('admin.category')
                 ->with('message', 'عملیات موفقیت آمیز نبود ❗');

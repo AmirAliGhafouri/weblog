@@ -18,6 +18,6 @@ class News extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'news_categories', 'news_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'category_news', 'news_id', 'category_id');
     }
  }

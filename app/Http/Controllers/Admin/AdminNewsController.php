@@ -6,10 +6,8 @@ use App\Http\Requests\CreateNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Models\Category;
 use App\Models\News;
-use App\Models\NewsCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 /**
  * مدیریت اخبار توسط ادمین
@@ -55,11 +53,15 @@ class AdminNewsController extends AdminController
         }
 
         // اضافه کردن دسته‌بندی ها
-        foreach ($request->categories as $category_id) {
-            NewsCategory::create([
-                'news_id' => $news->id,
-                'category_id' => $category_id
-            ]);
+        if ($request->categories) {
+            try {
+                $news->categories()->attach($request->categories);
+            }
+            catch(\Exception $exception){
+                return redirect()
+                ->route('admin.dashboard')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+            }
         }
 
         return redirect()->
@@ -95,7 +97,7 @@ class AdminNewsController extends AdminController
     public function edit(UpdateNewsRequest $request)
     {
         // چک کردن درست بودن آی‌دی
-        News::findOrFail($request->id);
+        $oldNews = News::findOrFail($request->id);
 
         // حذف فیلد های خالی
         $newsEdit = collect($request->validated())->filter(function ($item) {
@@ -112,21 +114,25 @@ class AdminNewsController extends AdminController
 
         // اضافه کردن دسته‌بندی های جدید در صورن وجود
         if ($request->add_categories) {
-            foreach ($request->add_categories as $item) {
-                NewsCategory::create([
-                    'news_id' => $request->id,
-                    'category_id' => $item
-                ]);
+            try {
+                $oldNews->categories()->attach($request->add_categories);
+            }
+            catch(\Exception $exception){
+                return redirect()
+                ->route('admin.dashboard')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
             }
         }
 
         // حذف دسته‌بندی های خبر در صورت وجود
         if ($request->delete_categories) {
-            foreach ($request->delete_categories as $item) {
-                NewsCategory::where([
-                    'news_id' => $request->id, 
-                    'category_id' => $item
-                ])->delete();
+            try {
+                $oldNews->categories()->detach($request->delete_categories);
+            }
+            catch(\Exception $exception){
+                return redirect()
+                ->route('admin.dashboard')
+                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
             }
         }
 
@@ -152,14 +158,6 @@ class AdminNewsController extends AdminController
         // خذف از دیتابیس
         $destroy = News::destroy($id);
         if (!$destroy) {
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
-        }
-
-        // حذف رکورد های که دسته‌بندی ای به خبر حذف شده اختصاص داشت
-        $newsCategory = NewsCategory::where('news_id', $id)->delete();
-        if (!$newsCategory) {
             return redirect()
                 ->route('admin.dashboard')
                 ->with('message', 'عملیات موفقیت آمیز نبود ❗');
