@@ -90,7 +90,7 @@
 
                                 <div class="form-check text-right my-4 border rounded p-2">
                                     <p>اضافه کردن دسته‌بندی</p> 
-                                    @foreach ($otherCategories as $category)
+                                    @foreach ($categoriesNotRelated as $category)
                                         <input type="checkbox" value="{{ $category->id }}" id="flexCheckDefault" name="add_categories[]">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             {{ $category->name }}

@@ -8,7 +8,7 @@
         </div>
         <div class="d-flex flex-wrap justify-content-center align-items-stretch my-5">
             @foreach($categories as $item)
-                <a href="{{ route('details', ['id' => $item->news_id]) }}" class="card col-md-4 m-3">
+                <a href="{{ route('details', ['id' => $item->id]) }}" class="card col-md-4 m-3">
                     <div>
                         <div class="overflow-hidden card-imag-container d-flex align-items-center">
                             <img class="img-fluid w-100" src='{{URL::asset("$item->image")}}' alt="Card image">

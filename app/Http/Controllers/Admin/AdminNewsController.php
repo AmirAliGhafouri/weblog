@@ -75,36 +75,16 @@ class AdminNewsController extends AdminController
         $news = News::findOrFail($id);
 
         //دسته‌بندی های نسبت داده شده به خبر
-        $newsCategories = DB::table('news_categories')
-            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-            ->where('news_id', $id)
-            ->select('*', 'news_categories.id as news_categories_id', 'categories.id as id')
-            ->get();
+        $newsCategories = News::findOrFail($id)->categories;  
 
-        // آی‌دی های دسته‌بندی هایی که به خبر نسبت داده شدن
-        $newsCategoriesId = [];
-        foreach ($newsCategories as $item) {
-            array_push($newsCategoriesId, $item->id);
-        }
-
-        // آی‌دی دسته‌بندی هایی که به خبر نسبت داده نشده اند 
-        $allCategoriesId = Category::select('id')->get();
-        $CategoriesIdArray = [];
-        foreach ($allCategoriesId as $item) {
-            array_push($CategoriesIdArray, $item->id);
-        }
-
-        $otherCategoriesId = array_values(array_diff($CategoriesIdArray, $newsCategoriesId));
-
-        // دسته‌بندی هایی که به خبر نسبت داده نشده اند
-        $otherCategories = [];
-        foreach ($otherCategoriesId as $item) {
-            array_push($otherCategories, Category::where('id', $item)->first());
-        }
+        // دسته‌بندی هایی که به خبر موردنظر تعلق ندارند
+        $categoriesNotRelated = Category::whereDoesntHave('news', function ($query) use ($id) {
+            $query->where('news_id', $id);
+        })->get();
         
         return view('admin.news.news_edit', [
             'newsCategories' => $newsCategories, 
-            'otherCategories' => $otherCategories, 
+            'categoriesNotRelated' => $categoriesNotRelated, 
             'news' => $news
         ]);
     }

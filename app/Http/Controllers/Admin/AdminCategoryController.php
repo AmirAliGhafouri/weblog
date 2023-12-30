@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\News;
 use App\Models\NewsCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -171,15 +172,15 @@ class AdminCategoryController extends AdminController
     public function newsShow($name)
     {
         // اخبار
-        $categories = DB::table('news_categories')
-            ->join('categories', 'news_categories.category_id', '=', 'categories.id')
-            ->join('news', 'news_categories.news_id', '=', 'news.id')
-            ->where(['categories.name' => $name, 'news.status' => 1])
-            ->select('*', 'news.created_at as news_created_at')
-            ->get();
+        $newsInCategory = News::whereHas('categories', function ($query) use ($name) {
+            $query->where('name', $name);
+        })->get();
 
         // ویژگی ها دسته‌بندی
         $categoryDetail = Category::where('name', $name)->first();
-        return view('category', ['categories' => $categories, 'categoryDetail' => $categoryDetail]);
+        return view('frontend.category', [
+            'categories' => $newsInCategory, 
+            'categoryDetail' => $categoryDetail
+        ]);
     }
 }
