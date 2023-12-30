@@ -19,7 +19,7 @@ class AdminCategoryController extends AdminController
      */
     public function category()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(2);
         return view('admin.category.category', ['categories' => $categories]);
     }
 

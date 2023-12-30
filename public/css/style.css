@@ -156,3 +156,13 @@ ul {
   font-size: 12px;
   max-width: 250px;
 }
+
+/* صفحه بندی */
+.page-link{
+  color: #232227 !important;
+}
+.active span {
+  background: #232227 !important;
+  color: #fedb01 !important;
+  border-color: #232227 !important;
+}

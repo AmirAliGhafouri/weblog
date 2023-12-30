@@ -71,6 +71,9 @@
                     </tr>
                 @endforeach
             </table>
+            <div>
+                {{ $users->links('vendor.pagination.bootstrap-5') }}
+            </div>
         </div>
     </div>
 @endsection
