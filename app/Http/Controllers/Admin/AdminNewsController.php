@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\CreateNews;
 use App\Http\Requests\CreateNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -64,9 +66,13 @@ class AdminNewsController extends AdminController
             }
         }
 
-        return redirect()->
-            route('admin.dashboard')->
-            with('message', 'خبر جدید با موفقیت اضافه شد ✅');
+        // تعریف کردن یک رویداد و فرستادن کاربران عادی و خبر ایجاد شده
+        $users = User::where('role', 0)->get();
+        event(new CreateNews($news, $users));
+
+        return redirect()
+            ->route('admin.dashboard')
+            ->with('message', 'خبر جدید با موفقیت اضافه شد ✅');
     }
 
     /**

@@ -40,6 +40,25 @@ class UserController extends Controller
 
         User::where('id', $user_id)->update($request);
         return redirect()->route('user.panel')->with('message', 'ویرایش اطلاعات اب موفقیت انجام شد ✅');
+    }
 
+    /**
+     * نوتفیکیشن های ارسال شده برای یک کاربر
+     */
+    public function user_notfications()
+    {
+        // مشخصات کاربر
+        $user_id = auth()->user()->id;
+        $user = User::findOrFail($user_id);
+        // نوتفیکشین های خوانده نشده
+        $notifications = $user->unReadNotifications;
+
+        // تغییر وضعیت نوتفیکیشن ها به خوانده شده
+        foreach ($notifications as $item) {
+            $item->markAsRead();
+        }
+
+        // فرستادن نوتفیکشین های خوانده نشده به صفحه ی نوتفیکیشن کاربر
+        return view('frontend.notifications', ['notifications' => $notifications]);
     }
 }

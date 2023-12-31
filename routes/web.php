@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(UserController::class)->group(function () {
         Route::get('/user', 'showUserPanel')->name('user.panel');
         Route::post('/user-edit', 'edit')->name('user.edit');
+        Route::get('/user-notfications', 'user_notfications')->name('user.notification');
     });
 });
 
