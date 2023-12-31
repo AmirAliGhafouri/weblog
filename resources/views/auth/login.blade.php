@@ -10,7 +10,7 @@
                         <img class="img-fluid img-responsive form-img"  src='{{URL::asset("images/backgrounds/login.png")}}'>
                     </div>
                     <div class="col-lg-6 pl-md-5 bg-white p-5">
-                        <h2 class="display-5 text-center mb-5">ورود</h2>
+                        <h2 class="display-5 text-center mb-5">{{ __('message.login') }}</h2>
                         <form action="{{ route('login') }}" method="POST">
                             @csrf
                             <div class="form-group text-right my-4">
@@ -32,7 +32,7 @@
                                 @enderror
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-main px-5">ورود</button>
+                                <button type="submit" class="btn btn-main px-5">{{ __('message.login') }}</button>
                             </div>
                         </form>
                         <p class="text-center my-5">قبلا ثبت نام نکرده اید؟<a href="{{ route('register') }}"><b> ثبت‌نام </b></a></p>
