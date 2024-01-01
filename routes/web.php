@@ -24,9 +24,12 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
 Route::get('/news-details/{id}', [NewsController::class, 'details'])->name('details');
+Route::get('/news-view/{id}', [NewsController::class, 'showViewCount'])->name('news.viewCount');
+
 Route::get('/category/{name}', [CategoryController::class, 'categoryNewsShow'])->name('category');
-Route::get('/test', [HomeController::class, 'test'])->name('test');
+// Route::get('/test', [HomeController::class, 'test'])->name('test');
 
 // مسیر های کاربر عادی
 Route::group(['middleware' => 'auth'], function () {

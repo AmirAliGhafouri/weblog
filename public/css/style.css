@@ -133,6 +133,12 @@ ul {
   max-height: 300px;
 }
 
+/* نمایش جزییات خبر */
+.news-img-container {
+  max-height: 400px;
+  overflow: hidden;
+}
+
 .side-bar {
   height: 100vh;
 }
