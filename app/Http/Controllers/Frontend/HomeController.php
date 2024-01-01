@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\News;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\CreateNewsEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
 {

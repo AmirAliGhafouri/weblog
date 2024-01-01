@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Events\CreateNews;
 use App\Http\Requests\CreateNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
+use App\Jobs\NotificationJob;
 use App\Models\Category;
 use App\Models\News;
 use App\Models\User;
@@ -22,6 +23,8 @@ class AdminNewsController extends AdminController
     public function panel()
     {
         $news = News::with('categories')->get();
+
+        // بارسال اطاعات همه‌ی خبر ها به صفحه‌‌ی نمایش لیست خبر ها به ادمین
         return view('admin.news.dashboard', ['news' => $news]);
     }
 
@@ -31,6 +34,8 @@ class AdminNewsController extends AdminController
     public function showNewsAdd()
     {
         $categories = Category::all();
+
+        // فرستادن دسته‌بندی ها به صفحه‌ی افزودن خبر
         return view('admin.news.news_add', ['categories' => $categories]);
     }
 
@@ -45,7 +50,7 @@ class AdminNewsController extends AdminController
         $destinationPath = public_path()."/images/news";
         $request->image->move($destinationPath, $fileName);
 
-        // ذخیره اطلاعات در دیتابیس
+        // ذخیره خبر در دیتابیس
         $newsDetails['image'] = "images/news/$fileName";
         $news = News::create($newsDetails);
         if (!$news) {
@@ -66,9 +71,15 @@ class AdminNewsController extends AdminController
             }
         }
 
-        // تعریف کردن یک رویداد و فرستادن کاربران عادی و خبر ایجاد شده
+        // تعریف کردن یک رویداد برای فرستادن خبر ایجاد شده به کاربران عادی
         $users = User::where('role', 0)->get();
         event(new CreateNews($news, $users));
+
+        // برای ارسال یک نوتیفیکیشن ایمیل برای ادمین ها 1 دقیقه بعد ایجاد خبر جدید job تشکیل یک
+        $admin = User::findOrFail(7);
+        NotificationJob::dispatch($news, $admin)
+            ->onQueue('email')
+            ->delay(now()->addSecond(20));
 
         return redirect()
             ->route('admin.dashboard')

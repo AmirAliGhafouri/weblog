@@ -24,7 +24,10 @@ class UserController extends Controller
     public function showUserPanel()
     {
         $user_id = auth()->user()->id;
+        // مشخصات کاربر
         $user = User::where('id', $user_id)->first();
+
+        // فرستادن مشخصات کاربر به صفحه ی ویرایش
         return view('frontend.user', ['user' => $user]);
     }
 
@@ -34,11 +37,15 @@ class UserController extends Controller
     public function edit(UpdateUserRequest $req)
     {
         $user_id = auth()->user()->id;
+        // حذف فیلد های خالی
         $request = collect($req->validated())->filter(function ($item) {
             return $item != null;
         })->toArray();
 
+        // آپدیت کردن
         User::where('id', $user_id)->update($request);
+
+        // برگشت به صفحه ی ویرایش با پیغام موفقیت
         return redirect()->route('user.panel')->with('message', 'ویرایش اطلاعات اب موفقیت انجام شد ✅');
     }
 
