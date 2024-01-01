@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
+/**
+ * اعمال مربوط به اخبار
+ */
 class NewsController extends Controller
 {
     /**
@@ -22,8 +25,6 @@ class NewsController extends Controller
         $newsCategories = $newsDetail->categories->where('status', 1);
 
         // اضافه کردن تعداد بازدید خبر
-
-        // json مسیر فایل
         $filePath = public_path('json/counter.json');
 
         // وجود داشه باشه آپدیت می‌شود  json اگر فایل

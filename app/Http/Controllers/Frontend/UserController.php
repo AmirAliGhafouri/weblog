@@ -7,6 +7,9 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+/**
+ * اعمال مربوز به کاربران
+ */
 class UserController extends Controller
 {
     /**
@@ -46,7 +49,9 @@ class UserController extends Controller
         User::where('id', $user_id)->update($request);
 
         // برگشت به صفحه ی ویرایش با پیغام موفقیت
-        return redirect()->route('user.panel')->with('message', 'ویرایش اطلاعات اب موفقیت انجام شد ✅');
+        return redirect()
+            ->route('user.panel')
+            ->with('message', 'ویرایش اطلاعات اب موفقیت انجام شد ✅');
     }
 
     /**

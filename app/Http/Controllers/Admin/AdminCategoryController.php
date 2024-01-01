@@ -18,6 +18,7 @@ class AdminCategoryController extends AdminController
      */
     public function category()
     {
+        // تمامی دسته‌بندی ها
         $categories = Category::paginate(5);
         return view('admin.category.category', ['categories' => $categories]);
     }
@@ -35,14 +36,16 @@ class AdminCategoryController extends AdminController
      */
     public function add(CreateCategoryRequest $request)
     {
+        // ذخیره کردن دسته‌بندی جدید در دیتابیس
         $newCategory = Category::create($request->validated());
 
-        // چک کردن موفقیت آمیز بودن عملیات
+        // ذخیره نشدن دسته‌بندی دید در دیتابیس
         if (!$newCategory) {
             return redirect()
                 ->route('admin.category')
                 ->with('message', 'عملیات موفقیت آمیز نبود ❗');
         }
+
         return redirect()
             ->route('admin.category')
             ->with('message', 'دسته‌بندی جدید با موفقیت اضافه شد ✅');
@@ -53,6 +56,7 @@ class AdminCategoryController extends AdminController
      */
     public function showCategoryEdit($id)
     {
+        // مشخصات دسته‌بندی
         $category = Category::findOrFail($id);
         return view('admin.category.category_edit', ['category' => $category]);
     }
@@ -119,6 +123,8 @@ class AdminCategoryController extends AdminController
 
         // تغییر وضعیت به عدم نمایش
         $hide = Category::where('id', $id)->update(['status' => 0]);
+
+        // عدم موفقیت
         if (!$hide) {
             return redirect()
                 ->route('admin.category')
@@ -145,6 +151,8 @@ class AdminCategoryController extends AdminController
 
         // تغییر وضعیت به آشکار
         $visible = Category::where('id', $id)->update(['status' => 1]);
+
+        // عدم موفقیت
         if (!$visible) {
             return redirect()
                 ->route('admin.category')

@@ -15,6 +15,7 @@ class AdminUserController extends AdminController
      */
     public function list()
     {
+        // همه‌ی کاربران
         $users = User::paginate(10);
         return view('admin.user.users', ['users' => $users]);
     }
@@ -34,11 +35,14 @@ class AdminUserController extends AdminController
 
         // حذف کاربر از دیتابیس
         $destroy = User::destroy($id);
+
+        // عدم موفقیت
         if (!$destroy) {
             return redirect()
                 ->route('admin.users')
                 ->with('message', 'عملیات موفقیت آمیز نبود ❗');
         }
+
         return redirect()
             ->route('admin.users')
             ->with('message', 'کاربر مورد نظر با موفقیت حذف شد ✅');
@@ -59,6 +63,8 @@ class AdminUserController extends AdminController
 
         // تغییر وضعیت به ادمین
         $userUpdate = $user->update(['role' => 1]);
+
+        // عدم موفقیت
         if (!$userUpdate) {
             return redirect()
                 ->route('admin.users')

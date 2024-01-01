@@ -8,10 +8,13 @@ use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * اعمال مربوط به دسته‌بندی ها
+ */
 class CategoryController extends Controller
 {
     /**
-     *  نمایش اخبار بر اساس دسته بندی
+     *  نمایش اخبار بر اساس دسته‌بندی که نامش دریافت شده
      */
     public function categoryNewsShow($name)
     {
@@ -22,6 +25,8 @@ class CategoryController extends Controller
 
         // مشخصات دسته‌بندی
         $categoryDetail = Category::where(['name' => $name, 'status' => 1])->first();
+
+        // ارسال جزییات دسته‌بندی و اخبار مربوط بهش
         return view('frontend.category', [
             'categories' => $newsInCategory, 
             'categoryDetail' => $categoryDetail

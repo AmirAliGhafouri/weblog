@@ -9,6 +9,9 @@ use App\Notifications\CreateNewsEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
+/**
+ * اعمال مربوط به صفحه ی اصلی
+ */
 class HomeController extends Controller
 {
     /**
@@ -28,11 +31,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // تمام اخبار فعال با دسته‌بندی هاشون
         $news = News::with(['categories' => function ($query) {
             $query->where('status', 1);
         }])
         ->where('status', 1)
         ->get();
+
+        // فرستادن اخبار و دسته‌بندی ها به صفحه ی اصلی
         return view('frontend.home', ['news' => $news]);
     }
 }

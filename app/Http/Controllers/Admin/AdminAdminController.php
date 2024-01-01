@@ -16,6 +16,7 @@ class AdminAdminController extends AdminController
      */
     public function list()
     {
+        // ادمین ها
         $admins = User::where('role', 1)->get();
         return view('admin.admin.admins', ['admins' => $admins]);
     }
@@ -33,16 +34,20 @@ class AdminAdminController extends AdminController
      */
     public function add(CreateAdminRequest $request)
     {
+        // اطلاعات دریافت و پالایش شده
         $newAdmin = collect($request->validated())->toArray();
         $newAdmin['role'] = 1;
 
         // افزودن ادمین
         $admin = User::create($newAdmin);
+
+        // ذخیره نشدن اطلاعات ادمین جدید در دیتابیس 
         if (!$admin) {
             return redirect()
                 ->route('admin.list')
                 ->with('message', 'عملیات موفقیت آمیز نبود ❗');
         }
+        
         return redirect()
             ->route('admin.list')
             ->with('message', 'ادمین جدید با موفقیت اضافه شد ✅');

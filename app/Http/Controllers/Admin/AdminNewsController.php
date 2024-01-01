@@ -79,7 +79,7 @@ class AdminNewsController extends AdminController
         $admin = User::findOrFail(7);
         NotificationJob::dispatch($news, $admin)
             ->onQueue('email')
-            ->delay(now()->addSecond(20));
+            ->delay(now()->addMinute(1));
 
         return redirect()
             ->route('admin.dashboard')
@@ -155,6 +155,8 @@ class AdminNewsController extends AdminController
 
         // ذخیره اطلاعات در دیتابیس
         $news = News::where('id', $request->id)->update($newsEdit);
+
+        // عدم موفقیت
         if (!$news) {
             return redirect()
                 ->route('admin.dashboard')
@@ -174,13 +176,17 @@ class AdminNewsController extends AdminController
 
         // خذف از دیتابیس
         $destroy = News::destroy($id);
+
+        // عدم موفقیت
         if (!$destroy) {
             return redirect()
                 ->route('admin.dashboard')
                 ->with('message', 'عملیات موفقیت آمیز نبود ❗');
         }
 
-        return redirect()->route('admin.dashboard')->with('message', 'خبر موردنظر با موفقیت حذف شد ✅');
+        return redirect()
+            ->route('admin.dashboard')
+            ->with('message', 'خبر موردنظر با موفقیت حذف شد ✅');
     }
 
     /**
@@ -198,6 +204,8 @@ class AdminNewsController extends AdminController
 
         // تغییر وضعیت به عدم نمایش
         $hide = News::where('id', $id)->update(['status' => 0]);
+
+        // عدم موفقیت
         if (!$hide) {
             return redirect()
                 ->route('admin.dashboard')
@@ -214,6 +222,7 @@ class AdminNewsController extends AdminController
      */
     public function visible($id)
     {
+        // برسی وجود خبر موردنظر
         $news = News::where(['id' => $id, 'status' => 0])->first();
         if (!$news) {
             return redirect()
@@ -221,7 +230,10 @@ class AdminNewsController extends AdminController
                 ->with('message', 'خبر مورد نظر پیدا نشد ❗');
         }
 
+        // تغییر وضعیت خبر به آشکار
         $visible = News::where('id', $id)->update(['status' => 1]);
+
+        // عدم موفقیت
         if (!$visible) {
             return redirect()
                 ->route('admin.dashboard')
