@@ -45,7 +45,12 @@
                         <li>
                             <a href="{{ route('user.panel') }}" class="nav-link text-white mx-2">{{ Auth::user()->first_name }} <i class="fa-solid fa-user"></i></a>
                         </li>
+
+                        <li>
+                            <a href="{{ route('user.notification') }}" class="nav-link text-white mx-2"><i class="fa-solid fa-bell"></i></a>
+                        </li>
                     @endguest
+
                     @if (Gate::allows('isAdmin'))
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('admin.dashboard') }}">پنل ادمین <i class="fa-solid fa-user"></i></a>
