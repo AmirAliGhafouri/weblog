@@ -13,9 +13,9 @@
         <h2 class="text-center my-5">اخبار</h2>
         <div class="d-flex flex-wrap justify-content-center align-items-stretch my-5">
             @foreach($news as $item)
-                <a href="{{ route('details', ['id' => $item->id]) }}" class="card col-md-4 m-3">
+                <a href="{{ route('details', ['id' => $item->id]) }}" class="card col-md-3 m-3">
                     <div>
-                        <div class="overflow-hidden card-imag-container d-flex align-items-center">
+                        <div class="overflow-hidden card-imag-container d-flex align-items-center bg-dark">
                             <img class="img-fluid w-100" src='{{URL::asset("$item->image")}}' alt="Card image">
                         </div>
                         <div>
