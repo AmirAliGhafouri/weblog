@@ -91,6 +91,10 @@
                     </tr>
                 @endforeach
             </table>
+
+            <div class="my-5">
+                {{ $news->links('vendor.pagination.bootstrap-5') }}
+            </div>
         </div>
     </div>
 @endsection

@@ -22,7 +22,7 @@ class AdminNewsController extends AdminController
      */
     public function panel()
     {
-        $news = News::with('categories')->get();
+        $news = News::with('categories')->paginate(5);
 
         // بارسال اطاعات همه‌ی خبر ها به صفحه‌‌ی نمایش لیست خبر ها به ادمین
         return view('admin.news.dashboard', ['news' => $news]);
