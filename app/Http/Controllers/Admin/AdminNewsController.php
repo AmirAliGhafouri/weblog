@@ -123,7 +123,9 @@ class AdminNewsController extends AdminController
 
         // ذخیره کردن عکس در صورت وجود
         if ($request->image) {
-            $fileName = Carbon::now()->getTimestamp().$request->image->getClientOriginalName();
+            $fileName = Carbon::now()
+                ->getTimestamp().$request->image
+                ->getClientOriginalName();
             $destinationPath = public_path()."/images/news";
             $request->image->move($destinationPath, $fileName);
             $newsEdit['image'] = "images/news/".$fileName;

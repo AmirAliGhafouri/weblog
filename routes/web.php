@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminAdminController;
 use App\Http\Controllers\Admin\AdminNewsController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\NewsController;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/login/{language}', [LoginController::class, 'loginFormLanguage'])->name('login.language');
 
 Route::get('/news-details/{id}', [NewsController::class, 'details'])->name('details');
 Route::get('/news-view/{id}', [NewsController::class, 'showViewCount'])->name('news.viewCount');

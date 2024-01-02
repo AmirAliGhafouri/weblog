@@ -41,6 +41,17 @@ ul {
   background-position: center;
 }
 
+/* پوزیشن ها */
+.position-ralative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
 /* دکمه ها */
 .btn-main {
   background-color: #fedb01;
@@ -149,7 +160,7 @@ ul {
 }
 
 .active-link {
-  background-color: #fedb01;
+  background-color: #fedb01 !important;
   color: #232227 !important;
 }
 

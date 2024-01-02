@@ -40,6 +40,9 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * نمایش فرم ورود به حساب
+     */
     public function showLoginForm()
     {
         App::setLocale('fa');
@@ -54,6 +57,12 @@ class LoginController extends Controller
         if(Gate::allows('isAdmin'))
             return route('admin.dashboard');
         return route('home');
+    }
+
+    protected function loginFormLanguage($language)
+    {
+        App::setLocale($language);
+        return view('auth.login');
     }
 
 }

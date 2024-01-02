@@ -1,6 +1,7 @@
 <?php
 
     return [
-        'login' => 'ورود'
+        'login' => 'ورود',
+        'email' => 'ایمیل'
     ];
 ?>

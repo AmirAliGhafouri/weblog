@@ -36,7 +36,7 @@
                     </li>
 
                     <li>
-                        <a href="{{ route('admin.users') }}" class="p-3 text-white d-inline-block w-100 @if(request()->is('admin/users*')) {{ 'active-link' }} @endif"">
+                        <a href="{{ route('admin.users') }}" class="p-3 text-white d-inline-block w-100 @if(request()->is('admin/users*')) {{ 'active-link' }} @endif">
                             کاربران
                         </a>
                     </li>

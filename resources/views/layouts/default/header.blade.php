@@ -47,7 +47,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ route('user.notification') }}" class="nav-link text-white mx-2"><i class="fa-solid fa-bell"></i></a>
+                            <a href="{{ route('user.notification') }}" class="nav-link text-white mx-2">اعلان ها <i class="fa-solid fa-bell"></i></a>
                         </li>
                     @endguest
 
