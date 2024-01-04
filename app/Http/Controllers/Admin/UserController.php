@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 /**
  * مدیریت کاربران توسط ادمین
  */
-class AdminUserController extends AdminController
+class UserController extends AdminController
 {
     /**
      * صفحه‌ی اصلی مدیریت کاربران

@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminAdminController;
 use App\Http\Controllers\Admin\AdminCategoryController;
-use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\newsController as AdminNewsController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
