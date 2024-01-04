@@ -15,23 +15,26 @@ use Illuminate\Http\Request;
 /**
  * مدیریت اخبار توسط ادمین
  */
-class AdminNewsController extends AdminController
+class NewsController extends AdminController
 {
     /**
      * صفحه‌ی عملیات مربوط به اخبار 
+     * 
+     * @return \Illuminate\Contracts\View\View|array $news
      */
     public function panel()
     {
         $news = News::with('categories')->paginate(5);
 
-        // بارسال اطاعات همه‌ی خبر ها به صفحه‌‌ی نمایش لیست خبر ها به ادمین
         return view('admin.news.dashboard', ['news' => $news]);
     }
 
     /**
-     *نمایش صفحه‌ی اضافه کردن خبر
+     * نمایش صفحه‌ی اضافه کردن خبر 
+     * 
+     * @return \Illuminate\Contracts\View\View|array $categories
      */
-    public function showNewsAdd()
+    public function add()
     {
         $categories = Category::all();
 
@@ -41,13 +44,16 @@ class AdminNewsController extends AdminController
 
     /**
      * دریافت اطلاعات خبر و پالایش اطلاعات و اضافه کردن خبر
+     * 
+     * @param \App\Http\Requests\CreateNewsRequest $request مشخصات خبری که باید ایجاد بشه
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function add(CreateNewsRequest $request)
+    public function create(CreateNewsRequest $request)
     {
         $newsDetails = collect($request->validated())->except(['image', 'categories'])->toArray();
         // ذخیره تصویر
-        $fileName = Carbon::now()->getTimestamp().$request->image->getClientOriginalName();
-        $destinationPath = public_path()."/images/news";
+        $fileName = Carbon::now()->getTimestamp() . $request->image->getClientOriginalName();
+        $destinationPath = public_path() . "/images/news";
         $request->image->move($destinationPath, $fileName);
 
         // ذخیره خبر در دیتابیس
@@ -63,11 +69,10 @@ class AdminNewsController extends AdminController
         if ($request->categories) {
             try {
                 $news->categories()->attach($request->categories);
-            }
-            catch(\Exception $exception){
+            } catch (\Exception $exception) {
                 return redirect()
-                ->route('admin.dashboard')
-                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+                    ->route('admin.dashboard')
+                    ->with('message', 'عملیات موفقیت آمیز نبود ❗');
             }
         }
 
@@ -88,22 +93,31 @@ class AdminNewsController extends AdminController
 
     /**
      * نمایش صفحه‌ی ویرایش کردن یک خبر
+     * 
+     * @param int $id آی‌دی خبر
+     * 
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
+     * 
+     * @return \Illuminate\Contracts\View\View
+     * @return array $newsCategories دسته‌بندی های متعلق به خبر
+     * @return array $categoriesNotRelated دسته‌بندی هایی که به خبر تلق ندارند
+     * @return array $news جزییات خبر
      */
-    public function showNewsEdit($id)
+    public function edit($id)
     {
         $news = News::findOrFail($id);
 
         //دسته‌بندی های نسبت داده شده به خبر
-        $newsCategories = News::findOrFail($id)->categories;  
+        $newsCategories = News::findOrFail($id)->categories;
 
         // دسته‌بندی هایی که به خبر موردنظر تعلق ندارند
         $categoriesNotRelated = Category::whereDoesntHave('news', function ($query) use ($id) {
             $query->where('news_id', $id);
         })->get();
-        
+
         return view('admin.news.news_edit', [
-            'newsCategories' => $newsCategories, 
-            'categoriesNotRelated' => $categoriesNotRelated, 
+            'newsCategories' => $newsCategories,
+            'categoriesNotRelated' => $categoriesNotRelated,
             'news' => $news
         ]);
     }
@@ -111,7 +125,7 @@ class AdminNewsController extends AdminController
     /**
      * پالایش اطلاعات و ویرایش کردن یک خبر
      */
-    public function edit(UpdateNewsRequest $request)
+    public function update(UpdateNewsRequest $request)
     {
         // چک کردن درست بودن آی‌دی
         $oldNews = News::findOrFail($request->id);
@@ -124,22 +138,21 @@ class AdminNewsController extends AdminController
         // ذخیره کردن عکس در صورت وجود
         if ($request->image) {
             $fileName = Carbon::now()
-                ->getTimestamp().$request->image
+                ->getTimestamp() . $request->image
                 ->getClientOriginalName();
-            $destinationPath = public_path()."/images/news";
+            $destinationPath = public_path() . "/images/news";
             $request->image->move($destinationPath, $fileName);
-            $newsEdit['image'] = "images/news/".$fileName;
+            $newsEdit['image'] = "images/news/" . $fileName;
         }
 
         // اضافه کردن دسته‌بندی های جدید در صورن وجود
         if ($request->add_categories) {
             try {
                 $oldNews->categories()->attach($request->add_categories);
-            }
-            catch(\Exception $exception){
+            } catch (\Exception $exception) {
                 return redirect()
-                ->route('admin.dashboard')
-                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+                    ->route('admin.dashboard')
+                    ->with('message', 'عملیات موفقیت آمیز نبود ❗');
             }
         }
 
@@ -147,11 +160,10 @@ class AdminNewsController extends AdminController
         if ($request->delete_categories) {
             try {
                 $oldNews->categories()->detach($request->delete_categories);
-            }
-            catch(\Exception $exception){
+            } catch (\Exception $exception) {
                 return redirect()
-                ->route('admin.dashboard')
-                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+                    ->route('admin.dashboard')
+                    ->with('message', 'عملیات موفقیت آمیز نبود ❗');
             }
         }
 

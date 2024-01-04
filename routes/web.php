@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminAdminController;
-use App\Http\Controllers\Admin\AdminNewsController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\newsController as AdminNewsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -52,12 +52,12 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
             Route::get('/', 'panel')->name('admin.dashboard');
 
             // اضافه کردن خبر جدید
-            Route::get('/news-add', 'showNewsAdd')->name('admin.newsAdd');
-            Route::post('/news-add', 'add')->name('newsAdd');
+            Route::get('/news-add', 'add')->name('admin.newsAdd');
+            Route::post('/news-add', 'create')->name('newsAdd');
 
             // ویرایش خبر
-            Route::get('/news-edit/{id}', 'showNewsEdit')->name('admin.newsEdit');
-            Route::post('/news-edit/{id}', 'edit')->name('newsEdit');
+            Route::get('/news-edit/{id}', 'edit')->name('admin.newsEdit');
+            Route::post('/news-edit/{id}', 'update')->name('newsEdit');
 
             // حذف خبر
             Route::get('/news-remove/{id}', 'remove')->name('news.remove');
