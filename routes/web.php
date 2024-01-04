@@ -76,12 +76,12 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
             Route::get('/', 'category')->name('admin.category');
             
             // اضافه کردن دسته‌بندی
-            Route::get('/add', 'showCategoryAdd')->name('admin.categoryAdd');
-            Route::post('/add', 'add')->name('categoryAdd');
+            Route::get('/add', 'add')->name('admin.categoryAdd');
+            Route::post('/add', 'create')->name('categoryAdd');
 
             // ویرایش دسته‌بندی
-            Route::get('/edit/{id}', 'showCategoryEdit')->name('admin.editCategory');
-            Route::post('/edit/{id}', 'edit')->name('editCategory');
+            Route::get('/edit/{id}', 'edit')->name('admin.editCategory');
+            Route::post('/edit/{id}', 'update')->name('editCategory');
 
             // پنهان کردن دسته‌بندی
             Route::get('/hide/{id}', 'hide')->name('category.hide');

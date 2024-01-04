@@ -26,7 +26,7 @@ class CategoryController extends AdminController
     /**
      * نمایش صفحه‌ی اضافه کردن ‌دسته بندی
      */
-    public function showCategoryAdd()
+    public function add()
     {
         return view('admin.category.category_add');
     }
@@ -34,7 +34,7 @@ class CategoryController extends AdminController
     /**
      * دریافت مشخصات دسته‌بندی و اضافه کردن دسته‌بندی جدید
      */
-    public function add(CreateCategoryRequest $request)
+    public function create(CreateCategoryRequest $request)
     {
         // ذخیره کردن دسته‌بندی جدید در دیتابیس
         $newCategory = Category::create($request->validated());
@@ -54,7 +54,7 @@ class CategoryController extends AdminController
     /**
      * دریافت مشخصه دسته‌بندی و نمایش صفحه ی ویرایش دسته‌بندی به همراه مشخصات حال حاضر دسته‌بندی
      */
-    public function showCategoryEdit($id)
+    public function edit($id)
     {
         // مشخصات دسته‌بندی
         $category = Category::findOrFail($id);
@@ -64,7 +64,7 @@ class CategoryController extends AdminController
     /**
      * دریافت مشخصات جدید دسته‌بندی و ویرایش دسته‌بندی
      */
-    public function edit(UpdateCategoryRequest $request)
+    public function update(UpdateCategoryRequest $request)
     {
         // چک کردن موجود بودن شناسه‌ی وارد شده
         Category::findOrFail($request->id);
