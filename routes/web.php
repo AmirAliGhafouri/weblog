@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminAdminController;
+use App\Http\Controllers\Admin\AdminManagementController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\newsController as AdminNewsController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -96,7 +97,7 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
     });
 
     // ادمین ها
-    Route::controller(AdminAdminController::class)->group(function () {
+    Route::controller(AdminManagementController::class)->group(function () {
         Route::group(['prefix' => 'admins'], function () {
             // لیست ادمین ها
             Route::get('/', 'list')->name('admin.list');

@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 /**
  *  مدیریت ادمین توسط ادمین
  */
-class AdminAdminController extends AdminController
+class AdminManagementController extends AdminController
 {
     /**
      * لیست همه‌ی ادمین ها
