@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 /**
  * مدیریت دسته‌بندی ها توسط ادمین
  */
-class AdminCategoryController extends AdminController
+class CategoryController extends AdminController
 {
     /**
      * صفحه‌ی عملیات مربوط به دسته‌بندی ها 

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminAdminController;
-use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\newsController as AdminNewsController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\LoginController;
