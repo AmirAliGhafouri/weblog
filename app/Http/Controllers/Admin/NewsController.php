@@ -20,7 +20,7 @@ class NewsController extends AdminController
     /**
      * صفحه‌ی عملیات مربوط به اخبار 
      * 
-     * @return \Illuminate\Contracts\View\View|array $news
+     * @return \Illuminate\Contracts\View\View نمایش صفحه‌ی لیست اخبار
      */
     public function panel()
     {
@@ -32,7 +32,7 @@ class NewsController extends AdminController
     /**
      * نمایش صفحه‌ی اضافه کردن خبر 
      * 
-     * @return \Illuminate\Contracts\View\View|array $categories
+     * @return \Illuminate\Contracts\View\View
      */
     public function add()
     {
@@ -95,13 +95,7 @@ class NewsController extends AdminController
      * نمایش صفحه‌ی ویرایش کردن یک خبر
      * 
      * @param int $id آی‌دی خبر
-     * 
-     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
-     * 
      * @return \Illuminate\Contracts\View\View
-     * @return array $newsCategories دسته‌بندی های متعلق به خبر
-     * @return array $categoriesNotRelated دسته‌بندی هایی که به خبر تلق ندارند
-     * @return array $news جزییات خبر
      */
     public function edit($id)
     {
@@ -124,6 +118,9 @@ class NewsController extends AdminController
 
     /**
      * پالایش اطلاعات و ویرایش کردن یک خبر
+     * 
+     * @param \App\Http\Requests\UpdateNewsRequest $request مشخصات خبری که باید آپدیت بشه
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(UpdateNewsRequest $request)
     {
@@ -183,12 +180,14 @@ class NewsController extends AdminController
 
     /**
      *  حذف کامل خبر از دیتابیس
+     * 
+     * @param int $id آی‌دی خبری که قرار است حذف شود
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function remove($id)
     {
         News::findOrFail($id);
 
-        // خذف از دیتابیس
         $destroy = News::destroy($id);
 
         // عدم موفقیت
@@ -205,6 +204,9 @@ class NewsController extends AdminController
 
     /**
      *  تغییر وضعیت خبر به عدم نمایش
+     * 
+     * @param int $id آی‌دی خبری که قرار است پنهان شود
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function hide($id)
     {
@@ -233,6 +235,9 @@ class NewsController extends AdminController
 
     /**
      * آشکار کردن خبر هایی که وضعیتشون عدم نمایش است
+     * 
+     * @param int $id آی‌دی خبری که قرار است آشکار شود
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function visible($id)
     {
