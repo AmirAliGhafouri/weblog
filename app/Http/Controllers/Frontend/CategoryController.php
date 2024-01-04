@@ -16,7 +16,7 @@ class CategoryController extends Controller
     /**
      *  نمایش اخبار بر اساس دسته‌بندی که نامش دریافت شده
      */
-    public function categoryNewsShow($name)
+    public function newsShow($name)
     {
         // اخبار
         $newsInCategory = News::whereHas('categories', function ($query) use ($name) {

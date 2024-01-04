@@ -31,7 +31,7 @@ Route::get('/login/{language}', [LoginController::class, 'loginFormLanguage'])->
 Route::get('/news-details/{id}', [NewsController::class, 'details'])->name('details');
 Route::get('/news-view/{id}', [NewsController::class, 'showViewCount'])->name('news.viewCount');
 
-Route::get('/category/{name}', [CategoryController::class, 'categoryNewsShow'])->name('category');
+Route::get('/category/{name}', [CategoryController::class, 'newsShow'])->name('category');
 // Route::get('/test', [HomeController::class, 'test'])->name('test');
 
 // مسیر های کاربر عادی
