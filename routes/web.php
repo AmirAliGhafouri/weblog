@@ -103,8 +103,8 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
             Route::get('/', 'list')->name('admin.list');
 
             // افزودن ادمین
-            Route::get('/add', 'showAdminAdd')->name('admin.adminsAdd');
-            Route::post('/add', 'add')->name('adminsAdd');
+            Route::get('/add', 'add')->name('admin.adminsAdd');
+            Route::post('/add', 'create')->name('adminsAdd');
         });            
     });
 

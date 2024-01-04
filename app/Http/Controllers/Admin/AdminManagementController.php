@@ -24,7 +24,7 @@ class AdminManagementController extends AdminController
     /**
      *  نمایش صفحه ی افزودن ادمین جدید
      */
-    public function showAdminAdd()
+    public function add()
     {
         return view('admin.admin.admin_add');
     }
@@ -32,7 +32,7 @@ class AdminManagementController extends AdminController
     /**
      *  افزودن ادمین جدید
      */
-    public function add(CreateAdminRequest $request)
+    public function create(CreateAdminRequest $request)
     {
         // اطلاعات دریافت و پالایش شده
         $newAdmin = collect($request->validated())->toArray();
