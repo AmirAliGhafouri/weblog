@@ -47,7 +47,7 @@ class NewsController extends Controller
             }
             
             // تعداد بازدید خبر مورد‌نظر آپدیت می‌شود  
-            $this->updateValueInJason($newsId, $fileData, $filePath);
+            $this->updateValueInJson($newsId, $fileData, $filePath);
 
             // تعداد بازدید حال حاضر خبر
             $viewCount = $this->showViewCount($newsId);
@@ -89,7 +89,7 @@ class NewsController extends Controller
     /**
      * آپدیت کردن یک مقدار موجود در فایل جیسون
      */
-    public function updateValueInJason($newsId, $fileData, $filePath)
+    public function updateValueInJson($newsId, $fileData, $filePath)
     {
         // مقدار موجود را آپدیت می کنیم
         $addView = [$newsId => $fileData[$newsId] + 1];

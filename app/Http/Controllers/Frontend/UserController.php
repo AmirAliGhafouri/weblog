@@ -24,7 +24,7 @@ class UserController extends Controller
      * نشان دادن مشخصات 
      * فرم تغییر مشخصات    
      */
-    public function showUserPanel()
+    public function panel()
     {
         $user_id = auth()->user()->id;
         // مشخصات کاربر
@@ -37,7 +37,7 @@ class UserController extends Controller
     /**
      * ویرایش مشخصات کاربر
      */
-    public function edit(UpdateUserRequest $req)
+    public function update(UpdateUserRequest $req)
     {
         $user_id = auth()->user()->id;
         // حذف فیلد های خالی
@@ -57,7 +57,7 @@ class UserController extends Controller
     /**
      * نوتفیکیشن های ارسال شده برای یک کاربر
      */
-    public function user_notfications()
+    public function notfications()
     {
         // مشخصات کاربر
         $user_id = auth()->user()->id;

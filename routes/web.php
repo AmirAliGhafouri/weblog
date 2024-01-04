@@ -37,9 +37,9 @@ Route::get('/category/{name}', [CategoryController::class, 'newsShow'])->name('c
 // مسیر های کاربر عادی
 Route::group(['middleware' => 'auth'], function () {
     Route::controller(UserController::class)->group(function () {
-        Route::get('/user', 'showUserPanel')->name('user.panel');
-        Route::post('/user-edit', 'edit')->name('user.edit');
-        Route::get('/user-notfications', 'user_notfications')->name('user.notification');
+        Route::get('/user', 'panel')->name('user.panel');
+        Route::post('/user-edit', 'update')->name('user.edit');
+        Route::get('/user-notfications', 'notfications')->name('user.notification');
     });
 });
 
