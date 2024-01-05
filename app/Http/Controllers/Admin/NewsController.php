@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Events\CreateNews;
+use App\Exceptions\DatabaseOperationException;
 use App\Http\Requests\CreateNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Jobs\NotificationJob;
@@ -10,6 +11,7 @@ use App\Models\Category;
 use App\Models\News;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 
 /**
@@ -60,9 +62,7 @@ class NewsController extends AdminController
         $newsDetails['image'] = "images/news/$fileName";
         $news = News::create($newsDetails);
         if (!$news) {
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+            throw new DatabaseOperationException('DATABASE_ERROR');
         }
 
         // اضافه کردن دسته‌بندی ها
@@ -135,8 +135,8 @@ class NewsController extends AdminController
         // ذخیره کردن عکس در صورت وجود
         if ($request->image) {
             $fileName = Carbon::now()
-                ->getTimestamp() . $request->image
-                ->getClientOriginalName();
+                ->getTimestamp()
+                . $request->image->getClientOriginalName();
             $destinationPath = public_path() . "/images/news";
             $request->image->move($destinationPath, $fileName);
             $newsEdit['image'] = "images/news/" . $fileName;
