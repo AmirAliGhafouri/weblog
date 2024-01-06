@@ -13,7 +13,7 @@ class UserController extends AdminController
     /**
      * صفحه‌ی اصلی مدیریت کاربران
      */
-    public function list()
+    public function index()
     {
         // همه‌ی کاربران
         $users = User::paginate(10);

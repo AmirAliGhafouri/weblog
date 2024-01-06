@@ -112,7 +112,7 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
     Route::controller(AdminUserController::class)->group(function () {
         Route::group(['prefix' => 'users'], function () {
             // لیست کاربران ها
-            Route::get('/', 'list')->name('admin.users');
+            Route::get('/', 'index')->name('admin.users');
 
             //  حذف کاربر
             Route::get('/remove/{id}', 'remove')->name('user.remove');
