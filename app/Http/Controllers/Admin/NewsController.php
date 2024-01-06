@@ -24,7 +24,7 @@ class NewsController extends AdminController
      * 
      * @return \Illuminate\Contracts\View\View نمایش صفحه‌ی لیست اخبار
      */
-    public function panel()
+    public function index()
     {
         $news = News::with('categories')->paginate(5);
 

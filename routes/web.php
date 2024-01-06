@@ -50,7 +50,7 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
     Route::controller(AdminNewsController::class)->group(function () {
         Route::group(['prefix' => 'dashboard'], function () {
             // دسترسی به اخبار
-            Route::get('/', 'panel')->name('admin.dashboard');
+            Route::get('/', 'index')->name('admin.dashboard');
 
             // اضافه کردن خبر جدید
             Route::get('/news-add', 'add')->name('admin.newsAdd');
