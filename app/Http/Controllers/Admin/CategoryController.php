@@ -16,7 +16,7 @@ class CategoryController extends AdminController
     /**
      * صفحه‌ی عملیات مربوط به دسته‌بندی ها 
      */
-    public function category()
+    public function index()
     {
         // تمامی دسته‌بندی ها
         $categories = Category::paginate(5);

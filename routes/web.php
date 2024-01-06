@@ -74,7 +74,7 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
     Route::controller(AdminCategoryController::class)->group(function () {
         Route::group(['prefix' => 'category'], function () {
             // دسترسی به دسته‌بندی ها
-            Route::get('/', 'category')->name('admin.category');
+            Route::get('/', 'index')->name('admin.category');
             
             // اضافه کردن دسته‌بندی
             Route::get('/add', 'add')->name('admin.categoryAdd');
