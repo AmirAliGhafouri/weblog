@@ -14,7 +14,7 @@ class AdminManagementController extends AdminController
     /**
      * لیست همه‌ی ادمین ها
      */
-    public function list()
+    public function index()
     {
         // ادمین ها
         $admins = User::where('role', 1)->get();

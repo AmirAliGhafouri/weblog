@@ -100,7 +100,7 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
     Route::controller(AdminManagementController::class)->group(function () {
         Route::group(['prefix' => 'admins'], function () {
             // لیست ادمین ها
-            Route::get('/', 'list')->name('admin.list');
+            Route::get('/', 'index')->name('admin.list');
 
             // افزودن ادمین
             Route::get('/add', 'add')->name('admin.adminsAdd');
