@@ -52,7 +52,10 @@ class NewsController extends AdminController
      */
     public function create(CreateNewsRequest $request)
     {
-        $newsDetails = collect($request->validated())->except(['image', 'categories'])->toArray();
+        $newsDetails = collect($request->validated())
+            ->except(['image', 'categories'])
+            ->toArray();
+
         // ذخیره تصویر
         $fileName = Carbon::now()->getTimestamp() . $request->image->getClientOriginalName();
         $destinationPath = public_path() . "/images/news";
@@ -71,8 +74,8 @@ class NewsController extends AdminController
                 $news->categories()->attach($request->categories);
             } catch (\Exception $exception) {
                 return redirect()
-                    ->route('admin.dashboard')
-                    ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+                    ->back()
+                    ->with('message', $exception->getMessage());
             }
         }
 
@@ -88,7 +91,7 @@ class NewsController extends AdminController
 
         return redirect()
             ->route('admin.dashboard')
-            ->with('message', 'خبر جدید با موفقیت اضافه شد ✅');
+            ->with('message', 'SUCCESS');
     }
 
     /**
@@ -148,8 +151,8 @@ class NewsController extends AdminController
                 $oldNews->categories()->attach($request->add_categories);
             } catch (\Exception $exception) {
                 return redirect()
-                    ->route('admin.dashboard')
-                    ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+                    ->back()
+                    ->with('message', $exception->getMessage());
             }
         }
 
@@ -159,8 +162,8 @@ class NewsController extends AdminController
                 $oldNews->categories()->detach($request->delete_categories);
             } catch (\Exception $exception) {
                 return redirect()
-                    ->route('admin.dashboard')
-                    ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+                    ->back()
+                    ->with('message', $exception->getMessage());
             }
         }
 
@@ -169,13 +172,11 @@ class NewsController extends AdminController
 
         // عدم موفقیت
         if (!$news) {
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+            throw new DatabaseOperationException('DATABASE_ERRORR');
         }
         return redirect()
             ->route('admin.dashboard')
-            ->with('message', 'خبر موردنظر با موفقیت ویرایش شد ✅');
+            ->with('message', 'SUCCESS');
     }
 
     /**
@@ -192,14 +193,12 @@ class NewsController extends AdminController
 
         // عدم موفقیت
         if (!$destroy) {
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+            throw new DatabaseOperationException('DATABASE_ERRORR');
         }
 
         return redirect()
             ->route('admin.dashboard')
-            ->with('message', 'خبر موردنظر با موفقیت حذف شد ✅');
+            ->with('message', 'SUCCESS');
     }
 
     /**
@@ -213,9 +212,7 @@ class NewsController extends AdminController
         // برسی وجود خبر
         $news = News::where(['id' => $id, 'status' => 1])->first();
         if (!$news) {
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('message', 'خبر مورد نظر پیدا نشد ❗');
+           throw new DatabaseOperationException('NOTFOUND_ERROR');
         }
 
         // تغییر وضعیت به عدم نمایش
@@ -223,14 +220,12 @@ class NewsController extends AdminController
 
         // عدم موفقیت
         if (!$hide) {
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+            throw new DatabaseOperationException('DATABASE_ERROR');
         }
 
         return redirect()
             ->route('admin.dashboard')
-            ->with('message', 'خبر موردنظر با موفقیت پنهان شد ✅');
+            ->with('message', 'SUCCESS');
     }
 
     /**
@@ -244,9 +239,7 @@ class NewsController extends AdminController
         // برسی وجود خبر موردنظر
         $news = News::where(['id' => $id, 'status' => 0])->first();
         if (!$news) {
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('message', 'خبر مورد نظر پیدا نشد ❗');
+            throw new DatabaseOperationException('NOTFOUND_ERROR');
         }
 
         // تغییر وضعیت خبر به آشکار
@@ -254,13 +247,12 @@ class NewsController extends AdminController
 
         // عدم موفقیت
         if (!$visible) {
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('message', 'عملیات موفقیت آمیز نبود ❗');
+            throw new DatabaseOperationException('DATABASE_ERROR');
+
         }
 
         return redirect()
             ->route('admin.dashboard')
-            ->with('message', 'خبر موردنظر با موفقیت آشکار شد ✅');
+            ->with('message', 'SUCCESS');
     }
 }

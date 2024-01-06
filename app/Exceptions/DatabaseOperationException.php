@@ -24,7 +24,7 @@ class DatabaseOperationException extends Exception
     public function render()
     {
         return redirect()
-            ->route('admin.dashboard')
+            ->back()
             ->with('message', $this->getMessage());
     }
 }
