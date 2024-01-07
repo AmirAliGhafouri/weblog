@@ -104,7 +104,7 @@ class NewsController extends AdminController
     {
         $news = News::findOrFail($id);
 
-        //دسته‌بندی های نسبت داده شده به خبر
+        // دسته‌بندی های نسبت داده شده به خبر
         $newsCategories = News::findOrFail($id)->categories;
 
         // دسته‌بندی هایی که به خبر موردنظر تعلق ندارند
